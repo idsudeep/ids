@@ -52,7 +52,7 @@ if (is_array($fields)) {
 function catch_query_error ($query , $self ="something mixed ")
 {
 	if($result = mysqli_query($query)){ return $result;
-	 print_r($result);
+	
 	
 	}
 
