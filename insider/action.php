@@ -234,6 +234,10 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
       
   {
       
+    print_r($_POST['btn-assign']);
+
+    die();
+
     /* mongodb://heroku_gtz0xx3x:b8g6cgtdcg3ucqehpmpfk7nmui@ds137283.mlab.com:37283/heroku_gtz0xx3x */   
       $sub_code = $_POST['sub_code'];
       $sem =$_POST['sem'];

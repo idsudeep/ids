@@ -6,7 +6,7 @@
   
     if(isset($_GET['sub_code']))
     {
-      error_reporting(0);
+      
 
       $sem= $_GET['sem']; 
       $course = $_GET['course'];
