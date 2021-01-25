@@ -43,7 +43,8 @@
                     "MongoDB\\": "src/"
                 },
                 "files": [
-                    "src/functions.php"
+                    "src/functions.php",
+                    "src/config.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
