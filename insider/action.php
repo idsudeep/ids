@@ -137,7 +137,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
       /* $model= find_device();  */  /* make some changes*/
         $model = 'Android 6.0.1; Redmi 3s'; 
       
-    
+   
     
       $sql=  "SELECT userid,email,fname ,model_no,status , regno ,password FROM device_details,std_details
              WHERE email = '$email' && password='$password' && model_no like '$model' && device_details.dd_id  = std_details.userid "; 
@@ -234,9 +234,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
       
   {
       
-    print_r($_POST['btn-assign']);
-
-    die();
+   
 
     /* mongodb://heroku_gtz0xx3x:b8g6cgtdcg3ucqehpmpfk7nmui@ds137283.mlab.com:37283/heroku_gtz0xx3x */   
       $sub_code = $_POST['sub_code'];

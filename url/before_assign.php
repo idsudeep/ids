@@ -4,9 +4,9 @@
     require '../config.php';
    
   
-    if(isset($_GET['sub_code']))
+    if(isset($_GET['sub_code']) && $_GET['action']=='getStatus')
     {
-      
+      error_reporting(0);
 
       $sem= $_GET['sem']; 
       $course = $_GET['course'];
@@ -108,120 +108,6 @@
       header("location:process.html");
       die();
     }
-
-    if($_GET['action'] == 'update')
-
-    {
-
-   
-
-      
-      $sem= $_GET['sem']; 
-      $course = $_GET['course'];
-      $sub_code = $_GET['sub_code'];
-   
-
-      if(!empty($sem || $course || $sub_code))
-      {
-
-              $uri = "mongodb://localhost";
-              $client = new MongoDB\client ($uri);
-              $colcon = $course.$sem.'_'.$sub_code;
-        
-              $mongo_con = $client->heroku_gtz0xx3x->$colcon;
-        
-              $query_key = array('sub_code'=>$sub_code);
-              $query = new MongoDB\Driver\Query($query_key);
-              $bug = $mongo_con->find($query);
-              
-              $bugs_array = array();
-        
-            foreach ( $bug as $bug_id => $bugs)
-              {
-                
-                if($bugs['status'] =='P')
-                {
-                    array_push($bugs_array , array('regno'=> $bugs['std_id'],
-                                                    'sub_code'=>$bugs['sub_code'],
-                                                    'issue_date'=>$bugs['date'],
-                                                    'status'=>$bugs['status']));
-                }
-              }
-            
-              
-             $query_arr = array();
-             $pack_array = array('regno','sub_code','issue_date','status');
-             $key_i = $bugs_array[0];
-             $key_name = $key_i['issue_date'];
-            
-          if($connect)
-             {
-
-              $conn_query = "select issue_date from attendance_tbl where issue_date = '$key_name'";
-              
-
-              $quer = mysqli_query($connect,$conn_query);
-             
-
-              if($quer->num_rows != 1);
-              {
-
-                foreach ($bugs_array as $key => $value)
-                {
-                    $query_arr[] = "('" . $pack_array[0] . "', '" . $pack_array[1]. "', '" . $pack_array[2] . "', '" . $pack_array[3] . "', '" . $value["regno"] . "', '" . $value["sub_code"] . "', '" . $value["issue_date"] . "', '" . $value["status"] . "')";
-                }
-               
-                
-                $query_insert =  ("INSERT INTO attendance_tbl (regno, sub_code, issue_date, status) VALUES " . implode(', ', $query_arr)); 
-                
-                
-
-
-              }
-          
-
-
-              
-
-             }
-              
-         
-              // print_r($query);
-
-
-
-              
-              if(!empty($bugs_array))
-                {
-
-                    
-
-            
-                
-                 
-                  $table_name = 'attendance_tbl';
-                  $table_columns = array('regno' , 'sub_code' ,'issue_date', 'status');
-             
-             
-                 $resc= multiple_insert($table_name , $table_columns , $bugs_array );
-
-                print_r($resc);
-
-              
-
-          }
-      }
-      else
-      {
-        echo'NOT Required';
-      }
-      
-
-    
-
-
-
-      }
 
     
 ?>
