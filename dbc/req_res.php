@@ -15,8 +15,12 @@ $instance_student = new student();
      $course = $_GET['course'];
      $batch_no=$_GET['batch_no'];
 
+    
+     
+  
      $get_a = $instance_student->getAllStudentByPer($sem, $course, $sub_code, $start_date, $end_date, $batch_no);
  
+   
      if(!empty($get_a))
      {
         echo $get_a;  

@@ -102,22 +102,17 @@ height:200px;
                 <select style=" ;text-align:center" placeholder="Course" name="course" id="course" class="form-control">
                 
                    <option>MCA</option>
-                   <option>MBA</option> 
-                   <option>BCA</option>
-                   <option>BBM</option>
+                  
                 </select>   
                 </div>
 
                 <div class="col-md-2">
                
-               <label>Semester's </label>
+               <label>Odd Semester's </label>
               <select  name="sem" id="sem" class="form-control">
-                   <option value="1">One </option>
-                   <option value="2">Two</option>
-                   <option value="3">Three</option>
-                   <option value="4">Four</option>
-                   <option value="5">Five</option>
-                   <option value="6">Six</option>
+                 <option value="3">Three</option>
+                  <option value="5">Five</option>
+                 
                 </select>
                
             </div>
@@ -203,6 +198,12 @@ height:200px;
    <script>
 
 
+     $('#dyn-btn').on('click',function(){
+
+        console.log(this.value);
+
+
+     });
         
 
     $('#btn_Query').on('click',function(e){
@@ -231,9 +232,9 @@ height:200px;
           
             if(some.length<=0){
                
-                    console.log(this.click);
+                   
                     
-                        $.ajax({type:'GET',
+                        $.ajax({method:'GET',
                                 url: 'req_res.php?action=btn_Query',
                                 data: {'sem':sem,
                                     'course':course,
@@ -245,6 +246,7 @@ height:200px;
                                     dataType: "json",
                                     success:function(data){ 
                                     
+                                    console.log(data);
                                     if(data != undefined){
                                      
                                             $('#tableData td').remove();
@@ -257,7 +259,7 @@ height:200px;
 
                                               var  row= "";
                                                 
-                                                row = $("<tr><td>" + val[0].regno + "</td><td>" + val[0].total_days + "</td><td>"+val[0].per+"</td></tr>");
+                                                row = $("<tr><td id='dyn-btn'><a href=viewAllSubByRegno.php?regno="+ val[0].regno +"> " + val[0].regno + "</td><td>" + val[0].total_days + "</td><td>"+val[0].per+"</td><a/></tr>");
                                                  $("#tableData").append(row);  
                                        
 
@@ -305,23 +307,22 @@ height:200px;
                             
                             var subjects = [
 
-                        {"BCA" : "1", "code":"DBMS",    "name":"Database mangement system"},
-                        {"BCA" : "1", "code":"DC",      "name":"Discret Math"},
-                        {"BCA" : "1", "code":"DCC",      "name":"Data communication Network"},
-                        {"MCA" : "1", "code":"DBMSLab", "name":"Database Lab"},
+                        {"MCA" : "3", "code":"MCA301T",    "name":"File Structure"},
+                        {"MCA" : "3", "code":"MCA302T",    "name":"Obj-oriented Analysis and Design"},
+                        {"MCA" : "3", "code":"MCA303T",    "name":"Theory Of Computation"},
+                        {"MCA" : "3", "code":"MCA304T",    "name":"Statistical Analysis"},
+                        {"MCA" : "3", "code":"MCA305P",    "name":"File structure Lab"},
+                        {"MCA" : "3", "code":"MCA306P",    "name":"Design using UML Lab"},
+                        {"MCA" : "3", "code":"MCA307T",    "name":"Soft_core -QTRA"},
 
-                        {"MCA" : "1", "code":"SE",      "name":"software engineering"},
+                        {"MCA" : "5", "code":"MCA501T",     "name":"Advanced Web Programming"},
+                        {"MCA" : "5", "code":"MCA502T",     "name":"Ad-DataBase management System"},
+                        {"MCA" : "5", "code":"MCA503T",     "name":"Artifical intelligence"},
 
-                        {"MCA" :"2", "code":"QT" ,      "name":"quantiative technique"},
-                        {"MCA":"2", "code":"QTRA",     "name":"quantiative technique Research"},
-                        {"MCA":"2", "code":"AD",       "name":"Advance alorithim"},
-
-                        {"MCA" :"3", "code":"AJ" ,     "name":"Advance JAVA"},
-                        {"MCA" :"4", "code":"MP",      "name":"Management theme"},
-                        {"MCA" :"4", "code":"Perl",    "name":"Perl progamming"},
-                        {"MCA" :"5", "code":"PLAB",    "name":"Perl LAB"},
-                        {"MCA" :"5", "code":"AI" ,     "name":"Artificial inteligence"},
-                        {"MCA" :"5", "code":"AD" ,     "name":"Advance Databases"}
+                        {"MCA" :"5", "code":"MCA504T" ,     "name":"Open Elective"},
+                        {"MCA" :"5", "code":"MCA505P",      "name":"Advance Webprogramming"},
+                        {"MCA" :"5", "code":"MCA506P",      "name":"Mini Project"}
+                       
                         ];
 
 

@@ -60,33 +60,27 @@
                                         <label>Course </label>
                                         <select style=" ;text-align:center" placeholder="Course" name="course" id="course" class="form-control">
                                             <option>MCA</option>
-                                            <option>MBA</option> 
-                                            <option>BCA</option>
-                                            <option>BBM</option>
+                                     
                                         </select>   
                                     </div>
 
                                         <div class="col-sm-2">
                                             <label>Semester's </label>
                                             <select  name="sem" id="sem" class="form-control">
-                                                <option value="1">One </option>
-                                                <option value="2">Two</option>
                                                 <option value="3">Three</option>
-                                                <option value="4">Four</option>
                                                 <option value="5">Five</option>
-                                                <option value="6">Six</option>
-                                            </select>
+                                             </select>
                                         </div>
                                     <!-- I don't Know Why Iam using Span Here  -->
-                                        <span style="width:20%">
-                                            <label>Batch'no </label>
-                                            <select  name="batch_no" id="batch_no" >
+                                        <div class="col-sm-2">
+                                             <label>Batch'no </label>
+                                            <select  name="batch_no" id="batch_no" class="form-c">
                                                 <option value="18">Eighteen</option>
                                                 <option value="19">nineteen</option>
                                                 <option value="20">Twenty</option>
                                                 <option value="21">TwentyOne</option>
                                             </select>
-                                        </span>
+                                         </div>
 
                             <div class="col-sm-2">
                                     <label>Starting Date  : </label>
@@ -97,17 +91,11 @@
                                     <label>Ending Date :</label>
                                     <input type="Date" name="end_date" id="end_date" class="form-control" >
                                 </div>     
-                                        <!-- Json_Object_array_filter -->
-                                        <div class="col-sm-2">
-                                            <a href="#"> <h6 id="subject-list" style="color:purple; font-family:monospace">Click For subjects</h6></a>
-                                            <h6 id="Clear" hidden>clear</h6>
-                                                                        
-                                                                                <div id="list-item"> </div>
-                                        </div> 
+                                
                     </form> 
                                     <!--  Query_btn -->
                                 <div class="col-sm-2">
-                                        <input type="submit" id="btn_Query" name="btn_Query" value="Query" class="btn btn-primary pull-right">
+                                        <input type="submit" id="btn_getAllStudent" name="btn_getAllStudent" value="btn_getAllStudent" class="btn btn-primary pull-right">
                                 </div>
                  </div>
 
@@ -115,24 +103,13 @@
                         <div class="second-row">
                             <div class="row">
                                         <hr>
-                                <div class="col-sm-12 offset-2 " style="float:left">
-                                    <table class="table table_border strive" id="tableData">
-                                        <th>Student's ID </th>
-                                        <th>Articial intelligency </th>
-                                        <th>ADMS</th>
-                                        <th>PLAB</th>
-                                        <th>
-                                        <th>Absent Days</th>
-                                        <th>Total Percentage</th>
-                                        <tr>
-                                        <td>000</td>
-                                        <td>56%</td>
-                                        <td>65%</td>
-                                        <td>44%<td>
-                                        <td>16</td>
-                                        <td>65%</td>
+                                <div class="col-sm-12 offset-2 " style="float:left ;  ;letter-spacing:0.78%;">
+                                    <table class="table table_border strive" id="mytable">
+                                        <th>Student's Details </th>
+                                       
+                                      
                                      
-                                        </tr>     
+                                       
                                     </table>
                                 </div>
                             </div>
@@ -148,11 +125,11 @@
                                                                 <script src="../js/bootstrap.js"></script>
                                                             
 <script>
-    $('#btn_Query').on('click',function(e){
+    $('#btn_getAllStudent').on('click',function(e){
 
                 e.preventDefault();
 
-                var sub_code = document.getElementById('sub_code').value;
+            /*      var sub_code = document.getElementById('sub_code').value; */ 
                 var sem = document.getElementById('sem').value;
             const course = document.getElementById('course').value;
             const start_date = formatDate(document.getElementById('start_date').value);
@@ -160,16 +137,15 @@
             const batch_no = document.getElementById('batch_no').value;
         
 
-            const someArray ={'sem':sem,
+            const someArray ={' sem':sem,
                             'course':course,
-                        'sub_code':sub_code,
                         'start_date':start_date,
-                        'end_date':end_date,
-                            'batch_no':batch_no };
+                          'end_date':end_date,
+                          'batch_no':batch_no };
 
                         
             var some = validate_input(someArray);
-
+             var item = [];
             console.log(someArray);
           
             if(some.length<=0){
@@ -177,30 +153,49 @@
                     console.log(this.click);
                     
                         $.ajax({type:'GET',
-                                url: 'req_res.php?action=btn_Query',
+                                url: 'getAllStudent_res.php?action=btn_getAllStudent',
                                 data: {'sem':sem,
                                     'course':course,
-                                'sub_code':sub_code,
-                                'start_date':start_date,
+                            'start_date':start_date,
                                 'end_date':end_date,
                                     'batch_no':batch_no },
                                 contentType: "application/json; charset=utf-8",
                                     dataType: "json",
                                     success:function(data){ 
+
+
                                     
-                                    if(data != undefined){
-                                     
-                                              $('#tableData td').remove();
-                                         $.each(data, function(index , val){
-                                             
-                 if(val){
-              var  row = "";                   
-                   row = $("<tr><td>" + val[0].regno + "</td><td>" + val[0].total_days + "</td><td>"+val[0].per+"</td></tr>");
-                                                 $("#tableData").append(row);  
+                                        var jdata = JSON.stringify(data);
+                                    
+                                        $.each(data, function(ss ,da){
+
+                                            console.log(da);
+                                        })
+
+                                  for(var i=0; i< data.length; i++){
+                                    $('#mytable').html(jdata);
+                                    $.each(data, function(i ,v){
+
+                                       if(v.regno)
+                                       {
+                                          
+                                           if(v.regno != item.regno)
+                                           {
+                                            for(var i=0; i< data.length; i++)
+                                            {
+                                                item.push(v.regno);
+                                                break;
                                             }
-                                                  
-                                         })
-                                    }
+                                           }
+                                           
+                                       }
+                                       
+                                    })
+                                    console.log(item);
+
+                                  }
+                                     
+                                  
                             }
                         
                         }) 
