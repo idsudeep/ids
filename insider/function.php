@@ -102,6 +102,8 @@ function isLoggedIn()
 	
 	return FALSE;
 }
+function faculty_loggedIn()
+{}
 
 
 ?>

@@ -155,10 +155,8 @@
                 <div id="page-container">
                     <h5 id="ack"></h5>
                  <hr>
-                    <center> <video id="preview"></video></center>
-                 
-                    <center> <button class="ybtn ybtn-success">Open Scan</button></center>
-                   
+                 <center> <video id="preview"></video></center>
+                
                     </div>
                 </div>
             </div>    

@@ -226,23 +226,21 @@ footer {
 var app = angular.module('myApp', []);
 app.controller('arrCtrl', function($scope) {
     $scope.subjects = [
-        {"MCA1" : "DBMS",  "value":"Database mangement system"},
-        {"MCA1" : "DC",    "value":"Discret Math"},
+        {"MCA3" : "MCA301T",    "value":"File Structure"},
+        {"MCA3" : "MCA302T",    "value":"Obj-oriented Analysis and Design"},
+        {"MCA3" : "MCA303T",    "value":"Theory Of Computation"},
+        {"MCA3" : "MCA304P",    "value":"File structure Lab"},
+        {"MCA3" : "MCA305P",    "value":"Design using UML Lab"},
       
-        {"MCA1" : "DCN",     "value":"Data communication Network"},
-        {"mca1" : "DBMSLab", "value":"Database Lab"},
-      
-        {"MCA4" : "SE",   "value":"software engineering"},
-      
-        {"MCA3" : "QT" ,  "value":"quantiative technique"},
-        {"MCA5" : "QTRA", "value":"quantiative technique Research"},
-        {"MCA4" : "AD",   "value":"Advance alorithim"},
-        {"MCA4" :"AJ" ,   "value":"Advance JAVA"},
-        {"MCA5" : "MP",   "value":"Management theme"},
-        {"MCA5" :"Perl",  "value":"Perl progamming"},
-        {"MCA5" : "PLAB", "value":"Perl LAB"},
-        {"MCA5" :"AI" ,   "value":"Artificial inteligence"},
-        {"MCA5" :"AD" ,   "value":"Advance Databases"}
+        {"MCA5" : "MCA501T" ,  "value":"Advanced Web Programming"},
+        {"MCA5" : "MCA502T",   "value":"Ad-DataBase management System"},
+        {"MCA5" : "MCA503T",   "value":"Artifical intelligence"},
+        {"MCA5" : "MCA504T" ,  "value":"Open Elective"},
+        {"MCA5" : "MCA505P",   "value":"Advance Webprogramming"},
+        {"MCA5" : "MCA506P",   "value":"Mini Project"}
+     
         ];
 });
+   
+
 </script>

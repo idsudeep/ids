@@ -47,12 +47,12 @@ session_start();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class=" active navbar-brand" href="process.html"> ---Direct Assign--</a>
+                <a class=" active navbar-brand" href="#"> ---Direct Assign--</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li><a href="../index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-king"></span>  About</a></li>
 
                 </ul>

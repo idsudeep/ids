@@ -74,13 +74,13 @@ height:200px;
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="hover"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li class="hover"><a href="../dbc/getAllStudent.php"><span class="glyphicon glyphicon-home"></span> Attendance viewport</a></li>
+                    <li class="hover"><a href="../insider/process.html"><span class="glyphicon glyphicon-home"></span> Back</a></li>
+                    <li class="hover"><a href="../dbc/getAllStudent.php"><span class="glyphicon glyphicon-home"></span>  viewport By JSON Format</a></li>
 
                 </ul>
            
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    <li><a href="../insider/logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                 
                 </ul>
             </div>
@@ -166,7 +166,7 @@ height:200px;
     
    <div class="self-div">
 
-<table class="table table_border strive" id="tableData">
+<table class="table table_border " id="tableData">
     <th>Student's ID </th>
     <th>Total Present Days </th>
     <th>Total Percentage</th>
@@ -313,7 +313,7 @@ height:200px;
                         {"MCA" : "3", "code":"MCA304T",    "name":"Statistical Analysis"},
                         {"MCA" : "3", "code":"MCA305P",    "name":"File structure Lab"},
                         {"MCA" : "3", "code":"MCA306P",    "name":"Design using UML Lab"},
-                        {"MCA" : "3", "code":"MCA307T",    "name":"Soft_core -QTRA"},
+                        {"MCA" : "3", "code":"MCA307T",    "name":"Soft_core QTRA"},
 
                         {"MCA" : "5", "code":"MCA501T",     "name":"Advanced Web Programming"},
                         {"MCA" : "5", "code":"MCA502T",     "name":"Ad-DataBase management System"},

@@ -38,7 +38,7 @@
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                     <ul class="nav navbar-nav">
                                         <li class="hover"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                                        <li class="hover"><a href="../dbc/attendance_view.php"><span class="glyphicon glyphicon-home"></span> Attendance viewport</a></li>
+                                        <li class="hover"><a href="../dbc/attendance_view.php"><span class="glyphicon glyphicon-home"></span>VeiwReports</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -95,7 +95,7 @@
                     </form> 
                                     <!--  Query_btn -->
                                 <div class="col-sm-2">
-                                        <input type="submit" id="btn_getAllStudent" name="btn_getAllStudent" value="btn_getAllStudent" class="btn btn-primary pull-right">
+                                        <input type="submit" id="btn_getAllStudent" name="btn_getAllStudent" value="getAllStudent" class="btn btn-primary pull-right">
                                 </div>
                  </div>
 
@@ -166,32 +166,15 @@
 
                                     
                                         var jdata = JSON.stringify(data);
-                                    
-                                        $.each(data, function(ss ,da){
-
-                                            console.log(da);
-                                        })
+                             
 
                                   for(var i=0; i< data.length; i++){
                                     $('#mytable').html(jdata);
                                     $.each(data, function(i ,v){
-
-                                       if(v.regno)
-                                       {
-                                          
-                                           if(v.regno != item.regno)
-                                           {
-                                            for(var i=0; i< data.length; i++)
-                                            {
-                                                item.push(v.regno);
-                                                break;
-                                            }
-                                           }
-                                           
-                                       }
+                                      if(v.regno){ /*think */ }
                                        
                                     })
-                                    console.log(item);
+                                    
 
                                   }
                                      
@@ -229,25 +212,25 @@
                              key_arr.push(obj);
 
                             
-                            var subjects = [
+                     
+                             var subjects = [
 
-                        {"BCA" : "1", "code":"DBMS",    "name":"Database mangement system"},
-                        {"BCA" : "1", "code":"DC",      "name":"Discret Math"},
-                        {"BCA" : "1", "code":"DCC",      "name":"Data communication Network"},
-                        {"MCA" : "1", "code":"DBMSLab", "name":"Database Lab"},
+                        {"MCA" : "3", "code":"MCA301T",    "name":"File Structure"},
+                        {"MCA" : "3", "code":"MCA302T",    "name":"Obj-oriented Analysis and Design"},
+                        {"MCA" : "3", "code":"MCA303T",    "name":"Theory Of Computation"},
+                        {"MCA" : "3", "code":"MCA304T",    "name":"Statistical Analysis"},
+                        {"MCA" : "3", "code":"MCA305P",    "name":"File structure Lab"},
+                        {"MCA" : "3", "code":"MCA306P",    "name":"Design using UML Lab"},
+                        {"MCA" : "3", "code":"MCA307T",    "name":"Soft_core -QTRA"},
 
-                        {"MCA" : "1", "code":"SE",      "name":"software engineering"},
+                        {"MCA" : "5", "code":"MCA501T",     "name":"Advanced Web Programming"},
+                        {"MCA" : "5", "code":"MCA502T",     "name":"Ad-DataBase management System"},
+                        {"MCA" : "5", "code":"MCA503T",     "name":"Artifical intelligence"},
 
-                        {"MCA" :"2", "code":"QT" ,      "name":"quantiative technique"},
-                        {"MCA":"2", "code":"QTRA",     "name":"quantiative technique Research"},
-                        {"MCA":"2", "code":"AD",       "name":"Advance alorithim"},
+                        {"MCA" :"5", "code":"MCA504T" ,     "name":"Open Elective"},
+                        {"MCA" :"5", "code":"MCA505P",      "name":"Advance Webprogramming"},
+                        {"MCA" :"5", "code":"MCA506P",      "name":"Mini Project"}
 
-                        {"MCA" :"3", "code":"AJ" ,     "name":"Advance JAVA"},
-                        {"MCA" :"4", "code":"MP",      "name":"Management theme"},
-                        {"MCA" :"4", "code":"Perl",    "name":"Perl progamming"},
-                        {"MCA" :"5", "code":"PLAB",    "name":"Perl LAB"},
-                        {"MCA" :"5", "code":"AI" ,     "name":"Artificial inteligence"},
-                        {"MCA" :"5", "code":"AD" ,     "name":"Advance Databases"}
                         ];
 
 
