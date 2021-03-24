@@ -63,7 +63,7 @@ $resultSubCodeByPer = $getSubCode->getSubCodeByPer($regno);
                     </ul>
             
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                        <li><a href="../insider/logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                     
                     </ul>
                 </div>
@@ -76,10 +76,11 @@ $resultSubCodeByPer = $getSubCode->getSubCodeByPer($regno);
             <div class="col-sm-12">
                 <div class="center-inner">
                 <div class ="table-row">
-                <span>
-                    Student's ID : <?php if(isset($_GET['regno'])){ echo $_GET['regno'];} ?>
+                Student's ID :<span style="color:purple; font-size:24px; padding-bottom:25px;">
+                     <?php if(isset($_GET['regno'])){ echo $_GET['regno'];} ?>
                 </span>
-                <table  class="table">
+        
+                <table  class="table" style="margin-top:25px;">
                 <tr>
                         <th>SubjectS</th>
                     <?php

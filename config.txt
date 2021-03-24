@@ -1,8 +1,0 @@
-
-/*
-$client = new MongoDB\Client(
-    'mongodb+srv://root:<password>@everythings-dj7ra.mongodb.net/<dbname>?retryWrites=true&w=majority');
-
-$db = $client->test;
-
-*/

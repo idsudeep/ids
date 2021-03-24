@@ -1,4 +1,8 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>faculty pannel</title>
@@ -55,8 +59,14 @@
                     <li class="hover"><a href="../dbc/attendance_view.php"><span class="glyphicon glyphicon-home"></span> Attendance viewport</a></li>
 
                 </ul>
-           
+                 
                 <ul class="nav navbar-nav navbar-right">
+                    <li style="color:green"><?php
+                    if(isset($_SESSION['facultyName'])){
+                        echo '<br>';
+                        echo $_SESSION['facultyName'];
+                    }
+                        ?></li>
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> logout</a></li>
                 
                 </ul>
@@ -82,6 +92,7 @@
                             <option>MCA</option>
                             <option>BCA</option>
                         </select>
+                        <input type="hidden" name='facultyID' value="<?php echo $_SESSION['faculty_id']; ?>">
                     </div>
                 </div>
                
@@ -247,12 +258,13 @@
               {
 
                 setTimeout(() => {
-
-                    var sub_code = document.querySelector('select#list-i.dynamic-li option').name;
-
+           // var sub_code = document.querySelector('select#list-i.dynamic-li option').name;
+                var subCode = document.getElementById('list-i').value;
                     var load = {'sem':sem,
                                 'course':course,
-                                'sub_code':sub_code};
+                                'sub_code':subCode};
+
+                                console.log(load);
 
 
                     $.ajax({

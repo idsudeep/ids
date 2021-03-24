@@ -10,19 +10,19 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
     
 {
     
+
     
-    $fname = $_POST['fname'];
-    $reg_no =$_POST['reg_no'];
+    $fname = strtoupper($_POST['fname']);
+    $reg_no =strtoupper($_POST['reg_no']);
     $email =$_POST['email'];
     $password=$_POST['password'];
     $repassword =$_POST['repassword'];
     $mobile= $_POST['mobile'];
     $d_type = $_POST['d_type'];
     $dd_l    = $_POST['dd_l'];
-    $course = $_POST['course'];
+    $course = strtoupper($_POST['course']);
     $sem = $_POST['sem'];
-    
-    
+
     
      $validation = validateInput(array(
     
@@ -85,7 +85,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
        $creg = strtoupper($reg_no);
       
       
-      $query_insert = "INSERT INTO `std_details` (`regno`, `fname`, `course`, `sem`, `email`, `password`, `mobile_no`) VALUES ( '$creg', '$fname', '$course', '$sem', '$email', '$password', '$mobile')";
+      $query_insert = "INSERT INTO `std_details` (`regno`, `fname`, `course`, `sem`,`batch_no`, `email`, `password`, `mobile_no`) VALUES ( '$creg', '$fname', '$course', '$sem','18', '$email', '$password', '$mobile')";
       $sql = mysqli_query($connect,$query_insert);
        if($sql = TRUE)
        {
@@ -172,62 +172,9 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
       }
       
   }
-
-/*end of login.php*/
- if(isset($_POST['btn_login']) && $_GET['action']=='faculty_log')
-      
-  {
-     
-    
-      $email = $_POST['email'];
-      $password = $_POST['password'];
-      
-    
-       $validation = validateInput(array('email'=>$email,
-                                         'password'=>$password
-                                        ));
-     
-     
-        if(count($validation)!=0)
-        {
-            $message ='';
-           foreach($validation as $errors)
-		 {
-			 $message .= $errors."<br/>";
-			 
-		 }
-		 MsgFlash('error','empty  fields . <br>'.$message);
-		 header ("location:faculty_log.php");
-		 die();  
-        }
-     
-     $sql = "select email,password from faculty_d where email ='$email' && password ='$password'";
-     
-       
-     $deploy = mysqli_query($connect,$sql);
-     
-     
-     
-        
-       if(mysqli_num_rows($deploy)!=0)
-           
-       {
-           
-             header('location:assign_subject.php');
-           
-                
-       }
-     
-     else 
-     {
-          MsgFlash('error','incorrect email or password ');
-         
-           header('location:faculty_log.php');
-         
-           die();
-     }
-     
- }
+/*
+  student login end 
+*/ 
 
 
   if(isset($_POST['btn-assign']) && $_GET['action']== 'sub_value')
@@ -242,7 +189,8 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
       $course = $_POST['course'];
  
       
-      $faculty_id = "101";
+      $faculty_id = $_POST['facultyID'];
+      
       $coll_name = $course.$sem."_".$sub_code;
     
        require '../vendor/autoload.php';

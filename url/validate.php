@@ -1,7 +1,8 @@
 <?php 
-
+ 
    session_start();
  require('../config.php');
+ require('../insider/function.php');
 
         if(($_GET['action'])=='btn_faculty'){
         $faculty_id = $_GET['faculty_id'];
@@ -15,10 +16,14 @@
 
          $QueryForPass = "select * from faculty_tbl where faculty_id ='$faculty_id' && password ='$password'";
           $RunQueryOnce = mysqli_query($connect,$QueryForPass);
-          if($RunQueryOnce->num_rows != 0){
-            echo json_encode(array('msg_id'=>'002','msg'=>'verified'));
-               
-          }else{
+          $arr_res = mysqli_fetch_object($RunQueryOnce);
+       
+            if($RunQueryOnce->num_rows != 0){
+            $facultyName = $arr_res->faculty_name; 
+            
+              faculty_loggedIn($faculty_id,$facultyName);
+              echo json_encode(array('msg_id'=>'002','msg'=>'verified'));
+            }else{
               echo json_encode(array('msg_id'=>'200','msg'=>'Invalid Password'));
 
           }

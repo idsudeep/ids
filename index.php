@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +73,10 @@
                 </ul>
            
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="#"><span class=""></span>
+                     <?php
+                        if(isset($_SESSION['facultyName'])){echo $_SESSION['facultyName'];}
+                        ?></a></li>
                 
                 </ul>
             </div>
@@ -173,7 +180,7 @@
                     document.getElementById('error_log').innerHTML = 'Sucess ,Processing.......'
                      document.getElementById('error_log').style='color:green';
                setTimeout(function(){
-                window.location.replace('insider/process.html');
+                window.location.replace('insider/process.php');
 
                },3000);
                 }else{

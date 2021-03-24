@@ -12,7 +12,7 @@
 
             $query ="SELECT ROUND((SELECT COUNT(*) FROM attendance_tbl 
                     WHERE status = 'P' AND regno = '".$regno."'AND sub_code ='".$sub_code."'
-                    AND issue_date BETWEEN '".$start_date."' AND '".$end_date."' ) * 100) / 128 AS percentage ";
+                    AND issue_date BETWEEN '".$start_date."' AND '".$end_date."' ) * 100) / 32 AS percentage ";
                         
                     $result = $this->db_handle->runBaseQuery($query);
                             foreach($result as $row){
@@ -124,13 +124,21 @@ function get_SubCode_Per($regno ,$sub_code){
 
     $returnPer = array();
 
-    $oneQuery ="SELECT ROUND((SELECT COUNT(*) FROM attendance_tbl 
-    WHERE status = 'P' AND regno = '".$regno."'AND sub_code ='".$sub_code."' ) * 100) / 128 AS percentage ";
+    $oneQuery ="SELECT ((SELECT COUNT(*) FROM attendance_tbl 
+    WHERE status = 'P' AND regno = '".$regno."'AND sub_code ='".$sub_code."' ) * 100) / 32 AS percentage ";
         
+
+
     $resOne = $this->db_handle->runBaseQuery($oneQuery);
+
+    print_r(round($resOne));
             foreach($resOne as $returnPer){
                 if($returnPer["percentage"] > 0){
-                    return $returnPer["percentage"] . '%';}
+                    $val = $returnPer['percentage'];
+                    $val_convert = intval($val);
+                    
+                    
+                    return $val_convert. '%';}
                         else{
                                 return 'NQ';
         
