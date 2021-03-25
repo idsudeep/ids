@@ -71,9 +71,9 @@
             
                <table id="people" border="1" class="table table-bordered">
              <thead>
-               <th>std_id</th>
+               <th>Regno</th>
                <th>status</th>
-                 <th>Qrcode</th>
+                 <th>Action</th>
           </thead>
   <tbody>
 
@@ -130,16 +130,23 @@
       // Loop through Object and create peopleHTML
       for (var key in JSONObject) {
         if (JSONObject.hasOwnProperty(key)) {
-
-         
-          peopleHTML += "<tr>";
-            peopleHTML += "<td>" + JSONObject[key]["std_id"] + "</td>";
+          
+     
+          
+            const remove= `<button class='btn-sm btn-danger'id='removeOne' value='${JSONObject[key]['std_id']}'>RemoveOne</button>`;
+            peopleHTML += "<tr>";
+            peopleHTML += "<td id='stdID'>" + JSONObject[key]["std_id"] + "</td>";
             peopleHTML += "<td>" + JSONObject[key]["status"] + "</td>";
-            peopleHTML += "<td>" + JSONObject[key]["qrcode"] + "</td>";
+            peopleHTML += "<td>"+ add +'  ' + remove  + "</td>";
           peopleHTML += "</tr>";
         }
       }
          $("#people tbody").html(peopleHTML);
+
+         $("#removeOne").on('click',function(){
+             var regno = document.getElementById('removeOne').value;
+             console.log('ha');
+         });
     }
     
     });                  
@@ -147,7 +154,7 @@
                         }, 3000);
 }
     
-  
+ 
     
 
 </script>
