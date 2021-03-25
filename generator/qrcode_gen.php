@@ -137,8 +137,8 @@
             peopleHTML += "<tr>";
             peopleHTML += "<td id='stdID'>" + JSONObject[key]["std_id"] + "</td>";
             peopleHTML += "<td>" + JSONObject[key]["status"] + "</td>";
-            peopleHTML += "<td>"+ add +'  ' + remove  + "</td>";
-          peopleHTML += "</tr>";
+            peopleHTML += "<td>" + remove  + "</td>";
+            peopleHTML += "</tr>";
         }
       }
          $("#people tbody").html(peopleHTML);
