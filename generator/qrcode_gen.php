@@ -12,6 +12,33 @@
 <link href="../css/Site.css" rel="stylesheet">    
 <script src="script/ajax_generate_code.js"></script>
 </head>
+<style>
+.navr-bar{
+  margin-bottom:0px !important;
+}
+.Qrcode-box{
+  width: 50% ;
+  padding:6px;
+  height:170px;
+  
+}
+
+
+  .tableFixHead {
+        overflow-y: auto;
+        height: 200px;
+      }
+      .tableFixHead thead th {
+        position: sticky;
+        top: 0;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+
+</style>
 <body onload ="RefeshWhenLoad()">
 <div role="navigation" class="navbar navbar-default navbar-static-top">
       <div class="container">
@@ -22,11 +49,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand">QRcode</a>
+          <a href="#" class="navbar-brand"></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li><span><span style="color:Green; font-family:mono space; padding-left:18px !important;  font-size:19px">Subject Code : </span><span style="font-size:19px;color:purple; font-family:mono space; margin-top:25px; " ><?php if(isset($_GET['sub_code'])){echo $_GET['sub_code'];}?></span></span><a href="#"></a></li>
            
           </ul>
          
@@ -35,55 +62,61 @@
     </div>
 	
 
-	<div class="container">		
-		<div class="row">
-            <h2>Scan </h2>
-			<div class="col-md-3" hidden>
-		        <form class="form-horizontal" method="post" id="codeForm" onsubmit="return false">
-		            <div class="form-group">
-		            	<label class="control-label">Code Content : </label>
-		            	<input class="form-control col-xs-1" id="content" type="text" required="required">
-		            </div>
-		            <div class="form-group">
-		            	<label class="control-label">Code Level (ECC) : </label>
-		            	<select class="form-control col-xs-10" id="ecc">
-		            		<option value="H">H - best</option>
-		            		<option value="M">M</option>
-		            		<option value="Q">Q</option>
-		            		<option value="L">L - smallest</option>       		            
-		            	</select>
-		            </div>
-		            <div class="form-group">
-		            	<label class="control-label">Size : </label>
-		            	<input type="number" min="1" max="10" step="1" class="form-control col-xs-10" id="size" value="5">
-		            </div>
-		            <div class="form-group">
-		            	<label class="control-label"></label>
-		            	<input type="submit" name="submit" id="submit" class="btn btn-success" value="Generate QR Code">
-		            </div>
-		        </form>
-	    	</div>
-            <div class="col-md-4">
-	    		<div class="showQRCode"></div>
-	    	</div>
-            <div class="col-sm-4">
-            <h4>scanned user</h4>
-            
-               <table id="people" border="1" class="table table-bordered">
-             <thead>
-               <th>Regno</th>
-               <th>status</th>
-                 <th>Action</th>
-          </thead>
-  <tbody>
+	    <div class="container">		
+		      <div class="row">
+            <!-- <h5 style="color:purple">Scan </h5> -->
 
-  </tbody>
-</table>
-            
-            </div>
-            </div>
-	    	
-    	</div>
+             <div class="col-sm-1" hidden >
+                <form class="form-horizontal" method="post" id="codeForm" onsubmit="return false">
+                      <div class="form-group">
+                        <label class="control-label">Code Content : </label>
+                        <input class="form-control col-xs-1" id="content" type="text" required="required">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">Code Level (ECC) : </label>
+                        <select class="form-control col-xs-10" id="ecc">
+                          <option value="H">H - best</option>
+                          <option value="M">M</option>
+                          <option value="Q">Q</option>
+                          <option value="L">L - smallest</option>       		            
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">Size : </label>
+                        <input type="number" min="1" max="10" step="1" class="form-control col-xs-10" id="size" value="5">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label"></label>
+                        <input type="submit" name="submit" id="submit" class="btn btn-success" value="Generate QR Code">
+                      </div>
+                </form>
+              </div>
+                            <div class="col-sm-3">
+                             <div class="Qrcode-box">
+                             <div class="showQRCode">
+                            </div>
+                           </div>
+                            </div>
+                            <div class="col-sm-8">
+                            <div class="tableFixHead">
+                       
+      <table id="people">
+        <thead>
+          <tr>
+            <th>Regno </th>
+            <th>Percentage /Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+                                    
+                                  
+                            </div>  
+           </div>
+         
+  </div>
   
 	
     
@@ -129,13 +162,15 @@
       
       // Loop through Object and create peopleHTML
       for (var key in JSONObject) {
+
+
         if (JSONObject.hasOwnProperty(key)) {
           
      
           
-            const remove= `<button class='btn-sm btn-danger'id='removeOne' value='${JSONObject[key]['std_id']}'>RemoveOne</button>`;
+            const remove= `<button class='removeOne btn-sm btn-danger' value='${JSONObject[key]['std_id']}'>Remove</button>`;
             peopleHTML += "<tr>";
-            peopleHTML += "<td id='stdID'>" + JSONObject[key]["std_id"] + "</td>";
+            peopleHTML += "<td class='stdID'>" + JSONObject[key]["std_id"] + "</td>";
             peopleHTML += "<td>" + JSONObject[key]["status"] + "</td>";
             peopleHTML += "<td>" + remove  + "</td>";
             peopleHTML += "</tr>";
@@ -143,10 +178,40 @@
       }
          $("#people tbody").html(peopleHTML);
 
-         $("#removeOne").on('click',function(){
-             var regno = document.getElementById('removeOne').value;
-             console.log('ha');
-         });
+        $(".removeOne").on('click',function(){
+             /*
+              find the id Value  from the same row 
+            var dynbutton = $(this),
+                        tr = dynbutton.closest('tr');
+             var regno  = tr.find('td.stdID').text();
+
+             */
+                var regno = $(this).val();
+             console.log(regno + 'this value .');
+
+          if(regno != ''){
+
+            var someData ={'regno':regno,
+                      'collection':collection};
+            $.ajax({
+                    method:'GET',
+                      url:'../url/req_removeOne.php?action=Req_removeOne',
+              contentType:'application/json',    
+                  dataType:'json',
+                      data:someData,
+                  success:function(removeOnereq){
+
+                  console.log(removeOnereq);
+
+                  },
+                    error:function(error){
+                 
+
+                  }
+                });
+          }
+        });
+          
     }
     
     });                  

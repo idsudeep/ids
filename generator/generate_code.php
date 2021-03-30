@@ -28,7 +28,7 @@ $total_space= calculateFileSize($disk_space);
 $disk_free_space= calculateFileSize($disk_free_space);
 
 
-print_r($disk_free_space);
+
 $filecount = 0; 
   
 $files2 = glob( $directory ."*" ); 
@@ -60,10 +60,10 @@ if(isset($_POST) && !empty($_POST)) {
           /*  QRcode::png($codeContents, $pngAbsoluteFilePath); 
          */
          QRcode::png($codeContents, $pngAbsoluteFilePath, $_POST['ecc'], $_POST['size']); 
-            echo 'File generated!'; 
+            echo "<h5 style='color:blue; font-family:mono space;'>Generating...</h5>"; 
             echo '<hr />'; 
         } else { 
-            echo ' You can now Scan waiting to generate new One.!'; 
+            echo "<h5 style='color:Green'>Scan.</h5>"; 
             echo '<hr />'; 
         } 
     

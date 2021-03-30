@@ -223,7 +223,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
      
       
          
-      header("location:../generator/qrcode_gen.php?collect=".$coll_name);
+      header("location:../generator/qrcode_gen.php?collect=".$coll_name.'&sub_code='.$sub_code);
        echo "successfully update";
                         die();
        }
@@ -232,8 +232,8 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
          /* Insert into collections*/
       //  $document = array("subject"=>$sub_name);
       //    $deleteResult = $collection->deleteMany($document);
-      header("location:../generator/qrcode_gen.php?collect=".$coll_name);
-           echo "successfully deleted ";
+      header("location:../generator/qrcode_gen.php?collect=".$coll_name.'&sub_code='.$sub_code);
+            echo "successfully deleted ";
           die();
      }
   }
