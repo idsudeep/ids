@@ -90,11 +90,11 @@ session_start();
          
 
             <div class="col-sm-6" >
-                <h6 style="font-size: x-large; font-family: 'Courier New', Courier, monospace;" id="error_ms">How its Work  </h6>
+                <h6 style="font-size: x-large; font-family: 'Courier New', Courier, monospace;" id="error_ms">Welcome  </h6>
                 <hr>
                <div class="row">
-                <img src="img/img2.jpg" style="vertical-align: middle; padding: 5px; margin-left: 15px;"></img>
-              
+                <!-- <img src="img/img2.jpg" style="vertical-align: middle; padding: 5px; margin-left: 15px;"></img>
+               -->
                 </div>
              <div class="row">
                  <h4 style="font-family: 'Courier New', Courier, monospace; color: darkorange;">Our Story</h4>
@@ -111,7 +111,7 @@ session_start();
                 </div>
           </div>
             <div class="col-sm-6">
-                <h6 style="font-size: x-large; font-family: 'Courier New', Courier, monospace; color: brown;">Gateway : faculty | Student Corner </h6>
+                <h6 style="font-size: x-large; font-family: 'Courier New', Courier, monospace; color: brown;">Gateway : faculty |<span><a href="insider/sysadminlogin.php" style=" margin-left:12px;color:purple; text-decoration:none;">Admin login</a></span></h6>
                 <hr>
                 <div class="col-sm-6">
               <form method="POST" action="#">
@@ -119,7 +119,7 @@ session_start();
                 <div class="form-group">
                  
                      <label>FacultyID : </label>
-                     <input type="text" name="faculty_id" id="faculty_id" class="form-control">
+                     <input type="email" name="email" id="email" placeholder='Email' class="form-control">
                  </div>
                  <div class="form-group">
                 
@@ -128,13 +128,15 @@ session_start();
                  </div>
                 
                 </form>
-                <button class="btn btn-success" onclick=" validate_login()"style="margin-left: 50px;"> login as faculty</button>
+                <button class="btn btn-success" onclick=" validate_login()"style="width:100%; margin-bottom:28px;" > login </button> <br/>
+                <span ><a href="insider/signUpfaculty.php" style="padding:27px; margin-left:25px; color:purple; text-decoration:none;
+                font-family:mono space; font-size:17px;">SignUp for Faculty</a></span>
           
               
                          
 
-                          <div class="row">
-                              <h6 style=" margin-top:35px;font-size: 25px; color: darkorange; font-family: 'Courier New', Courier, monospace;">Student Corner</h6>
+                          <div class="row" style="margin-bottom:25px;">
+                              <h6 style=" margin-top:40px; margin-botton:35px;font-size: 25px; color: darkorange; font-family: 'Courier New', Courier, monospace;">Student Corner</h6>
                                   <a href="insider/login.php" style="color: #3c763d; margin-left: 50px;">Login</a> <span> or <a href ="insider/register.php" style="color: darkorchid;">signup</a></span>
                           </div>
             </div>
@@ -161,9 +163,9 @@ session_start();
 <script>
      function validate_login()
      {
-        var faculty_id = document.getElementById('faculty_id').value;
+        var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
-        var arr = {faculty_id:faculty_id,
+        var arr = {email:email,
                    password:password 
                    };
          var result = validate_input(arr);
@@ -176,11 +178,14 @@ session_start();
                 data:arr,
                 dataType:'json'
             }).then(function(data){
+
+
+                console.log(data);
                 if(data.msg_id==002 && data.msg=='verified'){
                     document.getElementById('error_log').innerHTML = 'Sucess ,Processing.......'
                      document.getElementById('error_log').style='color:green';
                setTimeout(function(){
-                window.location.replace('insider/process.php');
+                window.location.replace('insider/facultyMode.php');
 
                },3000);
                 }else{

@@ -6,6 +6,72 @@
     include_once("function.php");
     include_once("../config.php");
 
+
+   
+
+    if(isset($_POST['f_reg_btn']) &&  $_GET['action']=='f_reg'){
+
+      $email = $_POST['email'];
+      $password=$_POST['words'];
+      $repassword=$_POST['words_'];
+      $depart_ = strtoupper($_POST['depart_']);
+      $mobile_no=$_POST['mobileNo'];
+      $fname=$_POST['fname'];
+
+      $validation = validateInput(array(
+           'Email'=>$email,
+           'Password'=>$password,
+           'Second password'=>$repassword,
+           'Department'=>$depart_,
+           'Mobile no'=>$mobile_no,
+           'Name'=>$fname   
+                                  ));
+      if (count($validation)!=0){
+        $message="";
+        foreach($validation as $errors){
+          $message .= $errors."<br/>";
+        }
+        MsgFlash('error','empty  fields . <br>'.$message);
+        header ("location:signUpFaculty.php");
+        die();
+      }
+     
+      if($password!=$repassword){
+        MsgFlash('error','passwords do not match');
+        header("location:signUpfaculty.php");
+        die();
+      } 
+      if(count($validation)==0){
+
+        $QueryLayer ="select *from faculty_tbl where email = '$email'";
+        $RunQuerylayer=mysqli_query($connect,$QueryLayer);
+       
+        if($RunQuerylayer->num_rows !=0){
+          MsgFlash('error','Email Already Used by SomeOne.');
+          header("location:signUpfaculty.php");
+          die();
+       }
+       if($RunQuerylayer->num_rows<=0){
+         $QueryInsertOne="INSERT INTO `faculty_tbl` ( `faculty_name`, `email`, `Words_`, `mobile_no`, `dept_`, `issue_Date`, `status`) VALUES ('$fname', '$email', '$password', '$mobile_no', '$depart_', CURRENT_TIMESTAMP, 'inactive')";
+         $RunQueryInsertOne= mysqli_query($connect,$QueryInsertOne);
+         if($RunQueryInsertOne){
+           MsgFlash('success','Completed 100%.');
+           header('location:../index.php');
+           die();
+         } 
+      
+       }
+     
+     
+
+     
+
+      }
+      
+      
+
+    }
+
 if(isset($_POST['reg_btn']) && $_GET['action']=='register')
     
 {
@@ -177,6 +243,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
 */ 
 
 
+
   if(isset($_POST['btn-assign']) && $_GET['action']== 'sub_value')
       
   {
@@ -219,27 +286,118 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
                               "qrcode"=>$code);
                       
                 $insert = $collection->insertOne($document);
+
+                    
+          if($insert){
+
+                 $sqlQuery = "select * from class_tbl  where recent_date ='$date_time' && sub_code = '$sub_code'"; 
+                 $runQuery = mysqli_query($connect, $sqlQuery);
+
+                  if($runQuery->num_rows ==0){
+
+                   $Query_ = "select total_no_of_class from class_tbl where faculty_id= '$faculty_id' && sub_code ='$sub_code'";
+                   $Query__exe = mysqli_query($connect,$Query_);
                   
-     
-      
-         
-      header("location:../generator/qrcode_gen.php?collect=".$coll_name.'&sub_code='.$sub_code);
-       echo "successfully update";
-                        die();
+                    $set_total_no_of_cls = mysqli_fetch_assoc($Query__exe);
+                    $set_no_of_cls = $set_total_no_of_cls['total_no_of_class']+1; 
+                    $CheckBeforeInsertQuery = "select * from class_tbl where sub_code ='$sub_code' && (recent_date !='$date_time' || recent_date='') ";
+                    $RunCheckBeforeQuery = mysqli_query($connect,$CheckBeforeInsertQuery);
+
+                  if($RunCheckBeforeQuery->num_rows==0){
+                      $QueryInsertOne = "insert into class_tbl (faculty_id,sub_code,start_date,recent_date,total_no_of_class) values('$faculty_id','$sub_code','$date_time','$date_time','$set_no_of_cls') ";
+                      $QueryExecute = mysqli_query($connect,$QueryInsertOne);
+                      echo 'insert part';  
+                    }
+                  
+                  }
+
+                 $QueryForTotal_no_of_cls = "select * from class_tbl where faculty_id = '$faculty_id' && sub_code='$sub_code' ";
+                 $runQuery_no_of_cls = mysqli_query($connect , $QueryForTotal_no_of_cls); 
+                if($runQuery_no_of_cls->num_rows!=0){
+                  $Query__ = "select total_no_of_class from class_tbl where faculty_id= '$faculty_id' && sub_code ='$sub_code'";
+                  $someQuery = mysqli_query($connect ,$Query__);
+                  $no_of_class = mysqli_fetch_assoc($someQuery);
+                  $total_cls =  $no_of_class['total_no_of_class']+1;
+                  $OneMoreLayer = "select * from class_tbl where faculty_id = '$faculty_id' && sub_code='$sub_code' && recent_date !='$date_time'";
+                  $RunOneMoreQuery = mysqli_query($connect,$OneMoreLayer);
+                  if($OneMoreLayer->mysqli_num_rows ==0){
+                  $UpdateQuery_no_of_cls = "UPDATE class_tbl SET total_no_of_class = '".$total_cls."' , recent_date = '$date_time'  WHERE class_tbl.sub_code = '$sub_code' && recent_date !='$date_time'";
+                  echo "UPdate part";
+                  $runUpdateQuery= mysqli_query($connect, $UpdateQuery_no_of_cls);
+                  } 
+                } 
        }
-     else 
-     {
-         /* Insert into collections*/
-      //  $document = array("subject"=>$sub_name);
-      //    $deleteResult = $collection->deleteMany($document);
-      header("location:../generator/qrcode_gen.php?collect=".$coll_name.'&sub_code='.$sub_code);
-            echo "successfully deleted ";
-          die();
-     }
+       header("location:../generator/qrcode_gen.php?collect=".$coll_name.'&sub_code='.$sub_code);
+      }else{
+        //    $deleteResult = $collection->deleteMany($document);
+        header("location:../generator/qrcode_gen.php?collect=".$coll_name.'&sub_code='.$sub_code);
+              echo "successfully deleted ";
+            die();
+      }
+  }
+
+// sysadmin  
+
+if(isset($_POST['sysadmin_login_btn']) && $_GET['action']=='sysadmin1@@%'){
+
+  $email = $_POST['email'];
+  $password= $_POST['words'];
+
+  $validation = validateInput(array(
+                              'email '=>$email,
+                              'password'=>$password
+  ));
+
+  if(count($validation)!=0){
+    $message="";
+    foreach($validation as $errors){
+      $message .= $errors."<br/>";
+    }
+    MsgFlash('error',' '.$message);
+    header ("location:sysadminLogin.php");
+    die();
+
+  }
+
+  if(count($validation)==0){
+
+    $query = "select * from admin_pannel where email ='$email'";
+    $runQuery = mysqli_query($connect,$query);
+    if($runQuery->num_rows !=0){
+
+     $QueryForPass = "select * from admin_pannel where email ='$email' && Words='$password'";
+
+    
+  
+      $RunQueryOnce = mysqli_query($connect,$QueryForPass);
+      $arr_res = mysqli_fetch_object($RunQueryOnce);
+      if($RunQueryOnce->num_rows != 0){
+
+        
+        $AccountType = $arr_res->AccountType; 
+        $uId =$arr_res->userid;
+        sysAdminLogged($AccountType,$uId);
+        
+        MsgFlash('error',' logged In. <br>'.$message);
+        header ("location:sysAdminPannel.php");
+        die();
+      }else{
+        MsgFlash('error','Wrong Password'. '<br>'.$message);
+        header ("location:sysadminLogin.php");
+        die();
+      }
+   
+  }else{
+    MsgFlash('error','invalid Email. <br>'.$message);
+    header ("location:sysadminLogin.php");
+    die();
   }
 
 
 
+
+}
+}
 
 
 ?>

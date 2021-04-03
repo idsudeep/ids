@@ -8,6 +8,13 @@
                 $this->db_handle = new DBController(); }
 
 
+
+        function getTotalNoOfCls($sub_code ,$start_date){
+            $Query_Once = "select total_no_of_class from class_tbl where sub_code ='$sub_code' && start_date ='$start_date'";
+            $resultOnce = $this->db_handle->runBaseQuery($Query_Once);
+
+
+        }    
         function get_attendance_percentage($regno , $sub_code,$start_date,$end_date){ 
 
             $query ="SELECT ROUND((SELECT COUNT(*) FROM attendance_tbl 

@@ -2,8 +2,6 @@
 session_start();
 require_once('function.php');
 
-$dd_l = find_device();
-$d_type = whattype();
 
 ?>
 
@@ -74,31 +72,21 @@ $d_type = whattype();
             <div class="col-sm-6 offset-3">
               
                 
-<div class="mainreg">
-    <p class="sign" align="center">Sign Up</p>
+<div class="mainreg" style="height: auto !important; margin-bottom:8px;">
+    <p class="sign" align="center" style="color:#444488; font-family:mono space; ">Faculty Registration's</p>
     
     
-    <form class="form1" method="post" action="action.php?action=register">
-      <input class="un " type="text" align="center" placeholder="Registration No" name ="reg_no">
-        <input class="un" type="text" align="center" placeholder="firstname" name="fname">
-        <input class="un" type="text" align="center" placeholder="Course(MCA/MBA/MFA)" name="course">
-         <input type="text" name="dd_l" value="<?php echo $dd_l; ?>" hidden>
-        <input type="text" name="d_type" value="<?php echo $d_type; ?>"hidden>
-        <select class="un" placeholder="Semester" name="sem">
-            <option>Select Semester</option>
-            <option value="1">I</option>
-            <option value="2">II</option>
-            <option value="3">III</option>
-            <option value="4">IV</option>
-            <option value="5">V</option>
-            <option value="6">VI</option>
-        </select>
+    <form class="form1" method="post" action="action.php?action=f_reg">
+      
+        <input class="un" type="text" align="center" placeholder="FullName" name="fname">
+        <input class="un" type="text" align="center" placeholder="Department(MCA/MBA/MFA)" name="depart_">
+  
             
-        <input class="un" type="number" align="center" placeholder="Mobile no" name="mobile">
+        <input class="un" type="number" align="center" placeholder="Mobile no" name="mobileNo">
         <input class="un" type="email" align="center" placeholder="Email" name="email">
-      <input class="pass" type="password" align="center" placeholder="Password" name="password">
-        <input class="pass" type="password" align="center" placeholder="rePassword" name="repassword">
-      <button class="submit" align="center" name="reg_btn">Lets Go</button>
+      <input class="pass" type="password" align="center" placeholder="Password" name="words">
+      <input class="pass" type="password" align="center" placeholder="Second password" name="words_">
+      <button class="submit" align="center" name="f_reg_btn" style="margin-bottom:8px;">Register's</button>
         <br>
             
     </form>      
@@ -113,7 +101,7 @@ $d_type = whattype();
         </div>
     
  
-                                    </div>
+
     <!--Section End-->
     <!--Footer Start-->
     <div class="container-fluid">

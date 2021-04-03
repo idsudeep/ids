@@ -15,6 +15,17 @@ if(isset($_SESSION['userid'])&& isset($_SESSION['fname'])){
   unset($_SESSION['fname']);
   header('location: login.php');
 }
+if(isset($_SESSION['uId'])&& isset($_SESSION['AccountType'])){
+  unset($_SESSION['uId']);
+  unset($_SESSION['AccountType']);
+  header('location: sysAdminLogin.php');
+
+}
+header('location:../index.php');
+
+
+
+
 
 
 

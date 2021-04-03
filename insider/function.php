@@ -81,5 +81,18 @@
             }else{return false;}
         }
 
+        function sysAdminLogged($AccountType,$uId){
+            if(!isset($_SESSION['AccountType'])&& !isset($_SESSION['uId'])){
+                $_SESSION['AccountType']=$AccountType;
+                $_SESSION['uId']=$uId;
+            }
+        }
+function getCheckedSys(){
+    if(isset($_SESSION['AccountType'])&& isset($_SESSION['uId'])){
+        return array(
+            'AccountType'=>$_SESSION['AccountType'],
+            'uId'=>$_SESSION['uId']);           
+    }else{return false;}
+}
 
 ?>
