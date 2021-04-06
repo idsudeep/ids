@@ -34,9 +34,10 @@
 <P id="errors"></P>
     </span>
     <span id="getmodifieStd">
-        <span style="color:rgb(37, 214, 140);">Change Info</span>
+        <span style="color:rgb(37, 214, 140);"><h4>Change/update </h4></span>
+      
         <span style="color:darkorange;" id="errors"></span>
-        <h5 style="margin-left:25px; font-family:monospace; font-size: x-large;"> Student Details </h5>
+        <h5 style="margin-left:25px; margin-top: 30px; font-family:monospace; font-size: x-large; margin-bottom: 25px;"> Student Details </h5>
         <form>
             <div class="col-xs-2">
                 <div class="form-group">
@@ -55,15 +56,17 @@
             <button class="changeStdOne btn btn-info" name='btn_stdchange' onclick="ChangeStdinfo()">Submit</button>
             </div>
         </div>
-        <div id='tableContents'>
-       
-            <table class="table table-bordered" id="tableId">
+        <div id='tableContents' >
+            <div id="changed_message" style="font-family: monospace; color: limegreen; float: left;"></div>
+            <table class="table table-bordered" id="tableId" style="margin-top: 98px !important;">
                 <thead>
                    <tr><th style="width: 25%  !important;">Regno</th><th style="width: 32%  !important;">FullName</th><th>Semester</th><th style="width: 10% !important;">Course</th><th style=" width:20% !important;">mobile_no</th><th style="width:15%  !important;">status</th><th>Action</th></tr>
                 </thead>  
                  <tbody>
                </tbody>
                </table>
+            
+               
     </div>
     </span>
   

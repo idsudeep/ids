@@ -300,17 +300,25 @@ session_start();
                            var validate_setArray = validate_input(propArray);                             
                
                           if(validate_setArray.length<=0){
-                            var setArray = {'batchNo':batchNo, 'statuS':statuS,'regno':regnO,
-                                                        'mobile_no':mobilenO,'sem':seMesteR,
-                                                      'forwhat':forwhat ,'userID':reG};
+                            var setArray = {'batchNo':batchNo, 'statuS':statuS,'regNo':regnO,
+                                                        'mobileNo':mobilenO,'seMesteR':seMesteR,
+                                                      'forwhat':CoursE ,'userID':reG,'fullName':fullname, };
                               $.ajax({
                                   method:'GET',
                                   data:setArray,
                                   dataType:'json',
                                   url:'../sysF/getStdChangeReq.php?action=changeStd',
                                   success: function(Cdata){
-                            
+                                        if(Cdata.changed_status_code != ''){
+                                            document.getElementById('changed_message').innerHTML='';
+                                            document.getElementById('changed_message').innerHTML='Updated Succeed : '+Cdata.changed_status_code;   
+                                        }   
                                   }
+                              }).done(function(Cdata){
+                                  setTimeout(() => {
+                                    document.getElementById('changed_message').innerHTML='';
+                                  }, 3000);
+
                               }) 
                             }else{
                                 document.getElementById('errors').innerHTML ='';  
