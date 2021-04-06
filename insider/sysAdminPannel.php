@@ -153,7 +153,13 @@ session_start();
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-container">
-                <button class="dropdown-btn">MCA
+                <a href="actionOfSysadmin.php?Course=MCA" style="padding-inline: 20px; font-size:18px;">MCA</a>
+                <a href="actionOfSysadmin.php?Course=MBA" style="padding-inline: 20px; font-size:17px;">MBA</a>
+                <a href="actionOfSysadmin.php?Course=BCA" style="padding-inline: 20px; font-size:17px;">BCA</a>
+                <a href="actionOfSysadmin.php?Course=MBA" style="padding-inline: 20px; font-size:17px;">MBA</a>
+                <a href="actionOfSysadmin.php?Course=BCOM" style="padding-inline: 20px; font-size:17px;">BCOM</a>
+                  
+                <!-- <button class="dropdown-btn">MCA
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-containers">
@@ -161,25 +167,8 @@ session_start();
                     <a href="Course=MCA" style="padding-inline: 20px; font-size:18px;">Teacher's info</a>
                     
              
-                </div>
-                <button class="dropdown-btn">MBA
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-containers">
-                    <a href="course=MBA" style="padding-inline: 20px; font-size:17px;">Student's info</a>
-                    <a href="Course=MBA" style="padding-inline: 20px; font-size:18px;">Teacher's info</a>
-                    
-             
-                </div>
-                <button class="dropdown-btn">BCA
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-containers">
-                    <a href="course=BCA" style="padding-inline: 20px; font-size:17px;">Student's info</a>
-                    <a href="Course=MBA" style="padding-inline: 20px; font-size:18px;">Teacher's info</a>
-                    
-             
-                </div>
+                </div> -->
+               
                 
                 </div>
                 

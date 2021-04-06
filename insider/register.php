@@ -79,6 +79,7 @@ $d_type = whattype();
     
     
     <form class="form1" method="post" action="action.php?action=register">
+    <input class="un " type="text" align="center" placeholder="Batch no :- 18 Two Digit only" name ="BatchNo">
       <input class="un " type="text" align="center" placeholder="Registration No" name ="reg_no">
         <input class="un" type="text" align="center" placeholder="firstname" name="fname">
         <input class="un" type="text" align="center" placeholder="Course(MCA/MBA/MFA)" name="course">
@@ -115,14 +116,7 @@ $d_type = whattype();
  
                                     </div>
     <!--Section End-->
-    <!--Footer Start-->
-    <div class="container-fluid">
-        <footer>
-        <p>© 2019 <a href="http://footline.com/">Footline</a>, All rights reserved.</p>
-    </footer>
-        
-    </div>
-    <!--Footer End-->
+
 
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>

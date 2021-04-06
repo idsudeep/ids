@@ -57,16 +57,9 @@
          if($RunQueryInsertOne){
            MsgFlash('success','Completed 100%.');
            header('location:../index.php');
-           die();
-         } 
-      
-       }
-     
-     
-
-     
-
+           die(); } 
       }
+  }
       
       
 
@@ -87,6 +80,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
     $d_type = $_POST['d_type'];
     $dd_l    = $_POST['dd_l'];
     $course = strtoupper($_POST['course']);
+    $BatchNo = $_POST['BatchNo'];
     $sem = $_POST['sem'];
 
     
@@ -101,7 +95,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
                                             'd_type'=>$d_type,
                                             'dd_l'=>$dd_l,
                                             'course'=>$course,
-                                            'sem'=>$sem,
+                                            'BatchNo'=>$BatchNo,
                                               )
 								);
     
@@ -151,12 +145,12 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
        $creg = strtoupper($reg_no);
       
       
-      $query_insert = "INSERT INTO `std_details` (`regno`, `fname`, `course`, `sem`,`batch_no`, `email`, `password`, `mobile_no`) VALUES ( '$creg', '$fname', '$course', '$sem','18', '$email', '$password', '$mobile')";
+      $query_insert = "INSERT INTO `std_details` (`regno`, `fname`, `course`, `sem`,`batch_no`, `email`, `password`, `mobile_no`) VALUES ( '$creg', '$fname', '$course', '$sem','$BatchNo', '$email', '$password', '$mobile')";
       $sql = mysqli_query($connect,$query_insert);
        if($sql = TRUE)
        {
-          $date = date('y-m-d');
-     $query_insert_dd = "INSERT INTO `device_details` (`model_no`, `date_create`, `status`, `d_type`) VALUES ('$dd_l','$date', 'active', '$d_type')";
+         
+     $query_insert_dd = "INSERT INTO `device_details` (`model_no`, `d_type`) VALUES ('$dd_l', '$d_type')";
     
     $sql = mysqli_query($connect,$query_insert_dd);
       
@@ -201,13 +195,14 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
      /* $sql = "SELECT device_details.model_no, std_details.email, std_details.password FROM std_details LEFT JOIN device_details ON device_details.dd_id = std_details.sd_id AND std_details.email = '$email'";*/
      
       /* $model= find_device();  */  /* make some changes*/
-        // $model = 'Android 6.0.1; Redmi 3s'; 
+        $model = 'Android 6.0.1; Redmi 3s'; 
       
-        $model= find_device(); 
     
+
+     
       $sql=  "SELECT userid,email,fname ,model_no,status , regno ,password FROM device_details,std_details
              WHERE email = '$email' && password='$password' && model_no like '$model' && device_details.dd_id  = std_details.userid "; 
-        
+       
               $query1 = mysqli_query($connect ,$sql);
               $result = mysqli_fetch_assoc($query1);
            $sql_model = "SELECT userid,fname,regno,email, model_no FROM device_details,std_details
