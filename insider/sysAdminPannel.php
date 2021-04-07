@@ -156,7 +156,6 @@ session_start();
                 <a href="actionOfSysadmin.php?Course=MCA" style="padding-inline: 20px; font-size:18px;">MCA</a>
                 <a href="actionOfSysadmin.php?Course=MBA" style="padding-inline: 20px; font-size:17px;">MBA</a>
                 <a href="actionOfSysadmin.php?Course=BCA" style="padding-inline: 20px; font-size:17px;">BCA</a>
-                <a href="actionOfSysadmin.php?Course=MBA" style="padding-inline: 20px; font-size:17px;">MBA</a>
                 <a href="actionOfSysadmin.php?Course=BCOM" style="padding-inline: 20px; font-size:17px;">BCOM</a>
                   
                 <!-- <button class="dropdown-btn">MCA

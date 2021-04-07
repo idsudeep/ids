@@ -1,10 +1,11 @@
 <?php
     require('../config.php');
 
-if($_GET['action']=='changeStdinfo' && $_GET['action'] !== NULL){
+if($_GET['action']=='DeleteStdinfo' && $_GET['action'] !== NULL){
     $userID = $_GET['regno'];
     $Course = $_GET['forwhat'];
     $batchNo = $_GET['batchNo'];
+   
 
     $QueryLayer = "select userid, regno,Course,sem, fname ,status,mobile_no from std_details where course='$Course' && regno='$userID' && batch_no= '$batchNo'";
     $runQueryLayer = mysqli_query($connect,$QueryLayer);

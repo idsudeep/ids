@@ -1,14 +1,15 @@
 <?php 
 require_once('../config.php');
 
-if($_GET['action']=='stdApprove'){
+if($_GET['action']=='ViewStdinfo'){
 
+ 
 
-    $sem = $_GET['sem'];
+    $sem = $_GET['seMesteR'];
     $batchNo = $_GET['batchNo'];
     $course = $_GET['forwhat'];
 
-    $queryOne = "select regno, fname, mobile_no, status,date_of_join from std_details where status ='inactive' && sem = '$sem'&& course='$course' && batch_no='$batchNo' limit 5";
+    $queryOne = "select regno, fname, mobile_no, status,date_of_join from std_details where status ='active' && sem = '$sem'&& course='$course' && batch_no='$batchNo' limit 5";
     $run_query = mysqli_query($connect,$queryOne);  
     
     $someArr=[];

@@ -69,5 +69,78 @@
                
     </div>
     </span>
+
+    <P id="errors"></P>
+    </span>
+    <span id="getDeleteForm">
+        <span style="color:red; font-family:monospace; font-size: x-large; "><h4>Delete </h4></span>
+      
+        <span style="color:darkorange;" id="Delete_message"></span>
+        <h5 style="margin-left:25px; margin-top: 30px; font-family:monospace; font-size: x-large; margin-bottom: 25px;"> Student's </h5>
+        <form>
+            <div class="col-xs-2">
+                <div class="form-group">
+                <input type="text" class="form-control" id ="batchNumber"placeholder="Bactno's" name="batchNo">
+                </div>
+            </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                    <input type="text" class="form-control" id="rEgno" placeholder="Regno">
+                    </div>
+                </div>
+                    
+        </form>
+        <div class="col-xs-4">
+            <div class="form-group">
+            <button class="DeleteStdOne btn btn-info" name='btn_stdchange' onclick="GetDeleteStdInfo()">Submit</button>
+            </div>
+        </div>
+        <div id='tableContents' >
+            <div id="Delete_message" style="font-family: monospace; color: limegreen; float: left;"></div>
+            <table class="table table-bordered" id="tableId" style="margin-top: 98px !important;">
+                <thead>
+                   <tr><th style="width: 25%  !important;">Regno</th><th style="width: 32%  !important;">FullName</th><th>Semester</th><th style="width: 10% !important;">Course</th><th style=" width:20% !important;">mobile_no</th><th style="width:15%  !important;">status</th><th>Action</th></tr>
+                </thead>  
+                 <tbody>
+               </tbody>
+               </table>
+            
+               
+    </div>
+    </span>
+    <span id="ViewStdtbl">
+        <span style="color:darkorange;">View Student's</span>
+        <h5 style="margin-left:25px; font-family:monospace; font-size: x-large;">  field <span style="color:red">*</span></h5>
+      
+        <form>
+            <div class="col-xs-2">
+                <div class="form-group">
+                <input type="text" class="form-control" placeholder="Batchno's" id='BatchNo'>
+                </div>
+            </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Semester" id=seMesteR>
+                    </div>
+                </div>
+                    
+        </form>
+        <div class="col-xs-4">
+            <div class="form-group">
+            <button class="btn btn-info" name='btnStdChange'onclick="ViewAllStd()" id="StdDeleteBtn">Submit</button>
+            </div>
+        </div>
+        <div id='tableContents'>
+           
+            <table class="table table-bordered" id="tableId" >
+                <thead>
+                   <tr><th>Regno</th><th>FullName</th><th>mobile_no</th><th>status</th><th>Data</th><th>Action</th></tr>
+                </thead>  
+                 <tbody>
+               </tbody>
+               </table>
+               <h5 style="margin-left:25px; float:right; font-family:monospace; font-size: x-large; display:inline;" id="errormsg"> </h5>
+        
+    </div>
   
  

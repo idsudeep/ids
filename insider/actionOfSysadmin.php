@@ -237,6 +237,146 @@ session_start();
 
 <script>
     var forwhat = `<?php echo $_GET['Course'];?>`;  
+
+    
+    function ViewAllStd(){
+        var batchNo = document.getElementById('BatchNo').value;
+         var seMesteR = document.getElementById('seMesteR').value;
+
+         var fixArr= {'batchNo':batchNo,'seMesteR':seMesteR,'forwhat':forwhat};
+         somE_rEsult = validate_input(fixArr);
+
+         if(somE_rEsult.length<=0){
+            $.ajax({
+                method:'GET',
+                dataType:'json',
+                url:'../sysF/get-Std-ls.php?action=ViewStdinfo',
+                data:fixArr,
+                success:function(VData)
+                {
+                    var HTMLele = "";
+                    if(VData.length>0){
+                        for (var key in VData) {
+  
+  if (VData.hasOwnProperty(key)) {
+     const approve= `<button class='DeleteOneStd btn-sm btn-default' value='${VData[key]['userID']}' id="Updateid">link</button>`;
+     HTMLele += "<tr>";
+     HTMLele += "<td>" + VData[key]["regno"] + "</td>";
+     HTMLele += "<td>" + VData[key]["fname"] + "</td>";
+     HTMLele += "<td>" + VData[key]["mobile_no"] + "</td>";
+     HTMLele += "<td>" + VData[key]["status"] + "</td>";
+     HTMLele += "<td>" + VData[key]["DOJ"] + "</td>";
+ 
+
+      HTMLele += "<td>" +  approve  + "</td>";
+      HTMLele += "</tr>";
+  }
+}                   $("#tableId tbody").html(HTMLele);
+                   
+              
+
+                    }else{
+                        var message = 'NO result Found';
+                        $('#errormsg').html(message);
+                        HTMLele += "";
+                        $("#tableId tbody").html(HTMLele);
+                    setTimeout(() => { message ="";
+                        $('#errormsg').html(message);
+                      }, 2000);
+                    }
+                }  
+
+            })
+         }else{document.getElementById('errormsg').innerHTML ='';  
+                 var i;
+                 for( i=0; i<somE_rEsult.length; i++){
+                     document.getElementById('errormsg').innerHTML += somE_rEsult[i] +',  ';}
+                     document.getElementById('errormsg').style='color:red';
+                 setTimeout(() => {document.getElementById('errormsg').innerHTML = '' ; }, 2000);
+             
+         }
+        
+    }                               
+    function GetDeleteStdInfo(){
+        var batchNumber = document.getElementById('batchNumber').value;
+         var rEgno = document.getElementById('rEgno').value;
+
+         var setArr= {'batchNo':batchNumber,'regno':rEgno,'forwhat':forwhat};
+         SomeResult = validate_input(setArr);
+  
+        if(SomeResult.length <=0){
+            $.ajax({
+                method:'GET',
+                dataType:'json',
+                url:'../sysF/getStdDelete.php?action=DeleteStdinfo',
+                data:setArr,
+                success:function(DData)
+                {
+                    var HTMLele = "";
+                    if(DData.length>0){
+                        for (var key in DData) {
+  
+  if (DData.hasOwnProperty(key)) {
+     const approve= `<button class='DeleteOneStd btn-sm btn-warning' value='${DData[key]['userID']}' id="Updateid">Delete</button>`;
+      HTMLele += "<tr>";
+      HTMLele += '<td> '+DData[key]['regno']+'</td>';
+      HTMLele += '<td> '+DData[key]['fname']+'</td>';
+      HTMLele += '<td> '+DData[key]['sem']+'</td>';
+      HTMLele += '<td> '+DData[key]['Course']+'</td>';
+      HTMLele += '<td> '+DData[key]['mobile_no']+'</td>';
+      HTMLele += '<td> '+DData[key]['status']+'</td>';
+
+      HTMLele += "<td>" +  approve  + "</td>";
+      HTMLele += "</tr>";
+  }
+}                   $("#tableId tbody").html(HTMLele);
+                   
+              
+
+                    }else{
+                        var message = 'NO result Found';
+                        $('#Delete_message').html(message);
+                        HTMLele += "";
+                        $("#tableId tbody").html(HTMLele);
+                    setTimeout(() => { message ="";
+                        $('#Delete_message').html(message);
+                      }, 2000);
+                    }
+                    
+                    $('.DeleteOneStd').on('click',function(){
+                          var reG = $(this).val();
+                          var postD = {'Del_userid':reG};
+                       
+                          $.ajax({
+                                  method:'GET',
+                                  data:postD,
+                                  dataType:'json',
+                                  url:'../sysF/getStdDeleteReq.php?action=DeleteOneStd',
+                                  success: function(Deldata){
+                                        if(Deldata.Delete_status_code != ''){
+                                            document.getElementById('Delete_message').innerHTML='';
+                                            document.getElementById('Delete_message').innerHTML='Delete Succeed ';   
+                                     setTimeout(() => {document.getElementById('Delete_message').innerHTML = '' ; }, 2000);
+                                     var eleH =''
+                                     $("#tableId tbody").html(eleH);
+                                    }
+                                  }
+                              })
+                        
+                        })
+
+              
+                }
+                // ajax end
+            })
+    }else{  document.getElementById('Delete_message').innerHTML ='';  
+                 var i;
+                 for( i=0; i<SomeResult.length; i++){
+                     document.getElementById('Delete_message').innerHTML += SomeResult[i] +',  ';}
+                     document.getElementById('Delete_message').style='color:red';
+                 setTimeout(() => {document.getElementById('Delete_message').innerHTML = '' ; }, 2000);
+         }
+ }
   function ChangeStdinfo(){
          var batchNo = document.getElementById('batchNo').value;
          var regno = document.getElementById('regno').value;
@@ -364,6 +504,8 @@ function FunStdChange(){
         var arr = {'sem':sem,'batchNo':batchNo,'forwhat':forwhat};
 
         someresult = validate_input(arr);
+
+        console.log(arr);
         if(someresult.length <=0){
             $.ajax({
                 method:'GET',
@@ -531,8 +673,10 @@ function FunStdChange(){
                     });
                         $('#saction a').click(function(){
                         var setaction = $(this).text();
-                        var saction=$('#studentBtn').val();
-                        var saction=setaction+saction;
+                        var ssaction=$('#studentBtn').val();
+                        var saction=setaction+ssaction;
+                     
+                            console.log(saction);
                     
                     if((saction !='') && (saction =='AddStudent')){
                         
@@ -550,7 +694,27 @@ function FunStdChange(){
                             
                             success:function(data){$('#displayOne').load("../sysF/GetSpanId.html #getmodifieStd");}
                         })
+                        }if((saction !='')&&(saction =='DeleteStudent')){
+                        $.ajax({
+                            method:'get',
+                            url:'../sysF/GetSpanId.html',
+                            
+                            success:function(data){$('#displayOne').load("../sysF/GetSpanId.html #getDeleteForm");}
+                        })
+                        }if((saction !='')&&(saction =='DeleteStudent')){
+                        $.ajax({
+                            method:'get',
+                            url:'../sysF/GetSpanId.html',
+                         success:function(data){$('#displayOne').load("../sysF/GetSpanId.html #getDeleteForm");}
+                            })
+                        }if((saction !='')&&(saction =='ViewStudent')){
+                        $.ajax({
+                            method:'get',
+                            url:'../sysF/GetSpanId.html',
+                         success:function(data){$('#displayOne').load("../sysF/GetSpanId.html #ViewStdtbl");}
+                            })
                         }
+                        
                     });
 
                     })
