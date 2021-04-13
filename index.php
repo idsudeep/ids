@@ -185,7 +185,7 @@ session_start();
                     document.getElementById('error_log').innerHTML = 'Sucess ,Processing.......'
                      document.getElementById('error_log').style='color:green';
                setTimeout(function(){
-                window.location.replace('insider/sysAdminPannel.php');
+                window.location.replace('insider/setAttendance.php');
 
                },3000);
                 }else{

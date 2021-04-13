@@ -23,6 +23,9 @@ if(isset($_SESSION['uId'])&& isset($_SESSION['AccountType'])){
 }
 header('location:../index.php');
 
+session_destroy();
+
+
 
 
 

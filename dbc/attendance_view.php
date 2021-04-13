@@ -74,9 +74,8 @@ height:200px;
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="hover"><a href="../insider/process.html"><span class="glyphicon glyphicon-home"></span> Back</a></li>
-                    <li class="hover"><a href="../dbc/getAllStudent.php"><span class="glyphicon glyphicon-home"></span>  viewport By JSON Format</a></li>
-
+                    <li class="hover"><a href="../insider/setAttendance.php"><span class="glyphicon glyphicon-home"></span> Back</a></li>
+                   
                 </ul>
            
                 <ul class="nav navbar-nav navbar-right">
@@ -102,13 +101,15 @@ height:200px;
                 <select style=" ;text-align:center" placeholder="Course" name="course" id="course" class="form-control">
                 
                    <option>MCA</option>
+                   <option>MBA</option>
+         
                   
                 </select>   
                 </div>
 
                 <div class="col-md-2">
                
-               <label>Odd Semester's </label>
+               <label>Semester's </label>
               <select  name="sem" id="sem" class="form-control">
                  <option value="3">Three</option>
                   <option value="5">Five</option>

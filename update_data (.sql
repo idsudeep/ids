@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2021 at 09:41 PM
+-- Generation Time: Apr 13, 2021 at 05:01 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -91,16 +91,9 @@ CREATE TABLE `class_tbl` (
   `sub_code` varchar(20) NOT NULL,
   `start_date` date NOT NULL,
   `recent_date` date NOT NULL,
-  `total_no_of_class` int(5) NOT NULL
+  `total_no_of_class` int(5) NOT NULL,
+  `keyword` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `class_tbl`
---
-
-INSERT INTO `class_tbl` (`class_id`, `faculty_id`, `sub_code`, `start_date`, `recent_date`, `total_no_of_class`) VALUES
-(16, 1, 'MCA501T', '2021-04-02', '2021-04-02', 1),
-(17, 1, 'MCA506P', '2021-04-05', '2021-04-05', 1);
 
 -- --------------------------------------------------------
 
@@ -113,6 +106,13 @@ CREATE TABLE `device_details` (
   `model_no` text NOT NULL,
   `d_type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `device_details`
+--
+
+INSERT INTO `device_details` (`dd_id`, `model_no`, `d_type`) VALUES
+(1, 'Android 6.0.1; Redmi 3S', 'phone');
 
 -- --------------------------------------------------------
 
@@ -136,25 +136,7 @@ CREATE TABLE `faculty_tbl` (
 --
 
 INSERT INTO `faculty_tbl` (`faculty_id`, `faculty_name`, `email`, `Words_`, `mobile_no`, `dept_`, `issue_Date`, `status`) VALUES
-(7, 'GaribRaj Giridhar', 'raj@gmail.com', 'ioi', 97777777777, 'MCA', '2021-04-05 15:33:57', 'inactive');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sample`
---
-
-CREATE TABLE `sample` (
-  `id` int(5) NOT NULL,
-  `sample` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sample`
---
-
-INSERT INTO `sample` (`id`, `sample`) VALUES
-(1, 'dose');
+(12, 'Raj', 'sudeep.numb@gmail.com', 'ioi', 980000098, 'MCA', '2021-04-11 08:46:38', 'active');
 
 -- --------------------------------------------------------
 
@@ -177,6 +159,13 @@ CREATE TABLE `std_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `std_details`
+--
+
+INSERT INTO `std_details` (`userid`, `regno`, `fname`, `course`, `sem`, `batch_no`, `email`, `password`, `mobile_no`, `status`, `date_of_join`) VALUES
+(1, '18SKSAC006', 'SUDEEP', 'MCA', 5, 18, 'sudeep.numb@gmail.com', 'ioi', 9731892750, 'inactive', '2021-04-13 15:30:20');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -191,6 +180,12 @@ ALTER TABLE `admin_pannel`
 --
 ALTER TABLE `assign_subject`
   ADD PRIMARY KEY (`sub_id`);
+
+--
+-- Indexes for table `attendance_tbl`
+--
+ALTER TABLE `attendance_tbl`
+  ADD PRIMARY KEY (`at_id`);
 
 --
 -- Indexes for table `class_tbl`
@@ -211,12 +206,6 @@ ALTER TABLE `faculty_tbl`
   ADD PRIMARY KEY (`faculty_id`);
 
 --
--- Indexes for table `sample`
---
-ALTER TABLE `sample`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `std_details`
 --
 ALTER TABLE `std_details`
@@ -230,7 +219,7 @@ ALTER TABLE `std_details`
 -- AUTO_INCREMENT for table `admin_pannel`
 --
 ALTER TABLE `admin_pannel`
-  MODIFY `userid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
 
 --
 -- AUTO_INCREMENT for table `assign_subject`
@@ -239,34 +228,34 @@ ALTER TABLE `assign_subject`
   MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `attendance_tbl`
+--
+ALTER TABLE `attendance_tbl`
+  MODIFY `at_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `class_tbl`
 --
 ALTER TABLE `class_tbl`
-  MODIFY `class_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `class_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `device_details`
 --
 ALTER TABLE `device_details`
-  MODIFY `dd_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `dd_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `faculty_tbl`
 --
 ALTER TABLE `faculty_tbl`
-  MODIFY `faculty_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `sample`
---
-ALTER TABLE `sample`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `faculty_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `std_details`
 --
 ALTER TABLE `std_details`
-  MODIFY `userid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `userid` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -194,11 +194,13 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
       
      /* $sql = "SELECT device_details.model_no, std_details.email, std_details.password FROM std_details LEFT JOIN device_details ON device_details.dd_id = std_details.sd_id AND std_details.email = '$email'";*/
      
-      /* $model= find_device();  */  /* make some changes*/
-        $model = 'Android 6.0.1; Redmi 3s'; 
+      /* */  /* make some changes*/
+        // $model = 'Android 6.0.1; Redmi 3s'; 
       
     
+        $model= find_device(); 
 
+       
      
       $sql=  "SELECT userid,email,fname ,model_no,status , regno ,password FROM device_details,std_details
              WHERE email = '$email' && password='$password' && model_no like '$model' && device_details.dd_id  = std_details.userid "; 
@@ -207,7 +209,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
               $result = mysqli_fetch_assoc($query1);
            $sql_model = "SELECT userid,fname,regno,email, model_no FROM device_details,std_details
                       WHERE email = '$email' && model_no like '$model' && device_details.dd_id  = std_details.userid ";
-      
+   
               $query_model = mysqli_query($connect , $sql_model);
             if(mysqli_num_rows($query_model) != 0)
                     {
@@ -268,7 +270,7 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
           $date = new DateTime();
           $date_time = $date->format('Y-m-d');
       
-    
+       
             foreach ($cursor as $cur) {}  
                       if(empty($cur))
                         {
@@ -281,52 +283,14 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
                               "qrcode"=>$code);
                       
                 $insert = $collection->insertOne($document);
-
+                             
                     
-          if($insert){
-
-                 $sqlQuery = "select * from class_tbl  where recent_date ='$date_time' && sub_code = '$sub_code'"; 
-                 $runQuery = mysqli_query($connect, $sqlQuery);
-
-                  if($runQuery->num_rows ==0){
-
-                   $Query_ = "select total_no_of_class from class_tbl where faculty_id= '$faculty_id' && sub_code ='$sub_code'";
-                   $Query__exe = mysqli_query($connect,$Query_);
-                  
-                    $set_total_no_of_cls = mysqli_fetch_assoc($Query__exe);
-                    $set_no_of_cls = $set_total_no_of_cls['total_no_of_class']+1; 
-                    $CheckBeforeInsertQuery = "select * from class_tbl where sub_code ='$sub_code' && (recent_date !='$date_time' || recent_date='') ";
-                    $RunCheckBeforeQuery = mysqli_query($connect,$CheckBeforeInsertQuery);
-
-                  if($RunCheckBeforeQuery->num_rows==0){
-                      $QueryInsertOne = "insert into class_tbl (faculty_id,sub_code,start_date,recent_date,total_no_of_class) values('$faculty_id','$sub_code','$date_time','$date_time','$set_no_of_cls') ";
-                      $QueryExecute = mysqli_query($connect,$QueryInsertOne);
-                      echo 'insert part';  
-                    }
-                  
-                  }
-
-                 $QueryForTotal_no_of_cls = "select * from class_tbl where faculty_id = '$faculty_id' && sub_code='$sub_code' ";
-                 $runQuery_no_of_cls = mysqli_query($connect , $QueryForTotal_no_of_cls); 
-                if($runQuery_no_of_cls->num_rows!=0){
-                  $Query__ = "select total_no_of_class from class_tbl where faculty_id= '$faculty_id' && sub_code ='$sub_code'";
-                  $someQuery = mysqli_query($connect ,$Query__);
-                  $no_of_class = mysqli_fetch_assoc($someQuery);
-                  $total_cls =  $no_of_class['total_no_of_class']+1;
-                  $OneMoreLayer = "select * from class_tbl where faculty_id = '$faculty_id' && sub_code='$sub_code' && recent_date !='$date_time'";
-                  $RunOneMoreQuery = mysqli_query($connect,$OneMoreLayer);
-                  if($OneMoreLayer->mysqli_num_rows ==0){
-                  $UpdateQuery_no_of_cls = "UPDATE class_tbl SET total_no_of_class = '".$total_cls."' , recent_date = '$date_time'  WHERE class_tbl.sub_code = '$sub_code' && recent_date !='$date_time'";
-                  echo "UPdate part";
-                  $runUpdateQuery= mysqli_query($connect, $UpdateQuery_no_of_cls);
-                  } 
-                } 
-       }
+    
        header("location:../generator/qrcode_gen.php?collect=".$coll_name.'&sub_code='.$sub_code);
       }else{
         //    $deleteResult = $collection->deleteMany($document);
         header("location:../generator/qrcode_gen.php?collect=".$coll_name.'&sub_code='.$sub_code);
-              echo "successfully deleted ";
+      
             die();
       }
   }
@@ -392,6 +356,39 @@ if(isset($_POST['sysadmin_login_btn']) && $_GET['action']=='sysadmin1@@%'){
 
 
 }
+}
+
+if($_GET['action']== 'ApproveTeacher' && $_GET['DoorKey']=='001'){
+
+ $query = $_GET;
+ 
+ $facultyid = $query['facultyid'];
+ $Ourse =$query['Course'];
+
+ $queryOnce = "select * from faculty_tbl where  faculty_id = '$facultyid'";
+ $runQueryOnce = mysqli_query($connect, $queryOnce);
+  $getObj = mysqli_fetch_object($runQueryOnce);
+ if($getObj->status !="active"){
+ 
+  $queryUpdate ="UPDATE `faculty_tbl` SET `status` = 'active' WHERE 
+                                                              `faculty_tbl`.`faculty_id` = '$facultyid' && 
+                                                              dept_='$Ourse'";
+  
+  $queryUpdateOne = mysqli_query($connect,$queryUpdate);
+
+if($queryUpdateOne){
+
+  
+  MsgFlash('error','Approved '. '<br>'.$facultyid);
+
+    header('location:ApproveTeacher.php?Course='. $Ourse);
+    die();
+}
+}
+
+
+
+
 }
 
 

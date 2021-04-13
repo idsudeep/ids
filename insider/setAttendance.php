@@ -6,6 +6,7 @@ session_start();
 
 <html>
 <head>
+<script src='../js/popper.min.js'></script>
     <title>faculty pannel</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -14,25 +15,33 @@ session_start();
     
   <style> 
     #center_{
-        margin-left:0px;
-        margin-right:90px;
+       
+      
         height:430px;
         background-color:#67734205 ;
+        margin-left:98px;
+        color:black;
     }
-    #lc{
-        width:30%;
-        
-        float:left;
-        background:red;
+    
+    .rightside{
+       
+        background:#FFF;
+        height: 430px;
+        margin-left:70px !important;
+        padding-left:30px;
+        margin-top:25px;
+        padding-top:20px;
+
+    
+     
+    }
+    #displayOne {
+        width:90%;
+        background:#FFF2;
+        height: 430px;
 
     }
-    .rightside{
-        width:66%;
-        background:purple;
-        height: 430px;
-        float:right;
-        margin-left:15px;
-    }
+  
     .sidenav {
   height: 100%;
   width: 220px;
@@ -109,15 +118,15 @@ session_start();
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="hover"><a href="../index.php"><span class="glyphicon glyphicon-home" style="color:#444488;"></span> Home</a></li>
+                    <li class="hover"><a href="sysAdminPannel.php"><span class="glyphicon glyphicon-home" style="color:#444488;"></span> Admin Pannel</a></li>
                  
                 </ul>
                  
                 <ul class="nav navbar-nav navbar-right">
                     <li style="color:green"><?php
-                    if(isset($_SESSION['uId'])){
+                    if(isset($_SESSION['facultyName'])){
                         echo '<br>';
-                        echo 'UserID :'.$_SESSION['uId'];
+                        echo 'UserID :'.$_SESSION['facultyName'];
                     }
                         ?></li>
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> logout</a></li>
@@ -142,70 +151,111 @@ session_start();
                                     <?php } ?>
 								 </span>
 
-            <div id="someDiv" style="width:100%; height:430px; background: #67734205 !important; margin-bottom:25px;">
+</div>
+     
             <div id="center_" style="margin-top:20px; padding:2px;">
                
                   
-                <div class="sidenav" style="margin-top:26px; padding-left:25px;">
+         <div class="sidenav" style="margin-top:26px; padding-left:25px;">
          
-             
-                <button class="dropdown-btn">Department
+<!--              
+                <button class="dropdown-btn">Search 's'
                     <i class="fa fa-caret-down"></i>
-                </button>
+                </button> -->
                 <div class="dropdown-container">
-                <a href="actionOfSysadmin.php?Course=MCA" style="padding-inline: 20px; font-size:18px;">MCA</a>
-                <a href="actionOfSysadmin.php?Course=MBA" style="padding-inline: 20px; font-size:17px;">MBA</a>
-                <a href="actionOfSysadmin.php?Course=BCA" style="padding-inline: 20px; font-size:17px;">BCA</a>
-                <a href="actionOfSysadmin.php?Course=BCOM" style="padding-inline: 20px; font-size:17px;">BCOM</a>
+            <!-- <input type="text" name="seach" id="searchid" class="form-control"> -->
+              <select id='sem' style="margin-bottom:14px;margin-top:12px;margin-left:0px;width: 96%; height: 40px;" class="form-control"> 
+              <option value="1"style="color:red;">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+              <option value="4">Four</option>
+              <option value="5">Five</option>
+              <option value="6">Six</option>
+              </select>
                   
-                <!-- <button class="dropdown-btn">MCA
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-containers">
-                    <a href="Course=MCA" style="padding-inline: 20px; font-size:17px;">Student's info</a>
-                    <a href="Course=MCA" style="padding-inline: 20px; font-size:18px;">Teacher's info</a>
-                    
-             
-                </div> -->
-               
+             <button class='btn btn-success' style='margin-bottom:40px; margin-left:45px;'>Submit</button>
+                 </div>       
+                        <!-- <button class="dropdown-btn">MCA
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-containers">
+                            <a href="Course=MCA" style="padding-inline: 20px; font-size:17px;">Student's info</a>
+                            <a href="Course=MCA" style="padding-inline: 20px; font-size:18px;">Teacher's info</a>
+                        </div> -->
+                        <button class="dropdown-btn btn-info" id='attend_btn' value='Attendance'> Attendance
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-containers" id='getAction'>
+                            <a href="addA.php" style="padding-inline: 20px; font-size:18px;" >Add /Remove</a>
+                         
+                            
+                        </div>
+                        <button class="dropdown-btn btn-primary" id='studentBtn'value='Student'>View Attendance
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-containers" id='saction'>
+         <a href="../dbc/attendance_view.php" style="padding-inline: 20px; font-size:17px;">Get Attendance</a>
+     <a href="../dbc/getAllStudent.php" style="padding-inline: 20px; font-size:18px;">View AS JOSN </a>
+                            
+                        </div>
                 
-                </div>
-                
-
-         
-                
-                <button class="dropdown-btn">Admin Setting's
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-container">
-                    <a href="#">Change Password</a>
-                    <a href="#">view Details</a>
-             
-                </div>
-                </div>
-
-                
-                <div class='ri'></div>
-
-        
-            
-
-
+                      
             </div>
+           
+            <div class='rightside'>
 
+            <div id="displayOne">
 
-                </div>
+            <h5 style="color:blue; font-family:monospace; font-size:18px;"> Assign Subject to Faculty </h5>
+         
+
         
-        </div> 
-      
-        </div>
+       
+        <!-- end of display -->         
+        </div>        
+        <!-- end of right -->
+
+    </div>
+      <!-- end of Container -->
+ 
     <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.js"></script> 
+   
+   
 </body>
 </html>
-
 <script>
+$(function(){
 
+    
+    $('#getAction a').click(function(){
+                        var setaction = $(this).text();
+                        var ssaction=$('#attend_btn').val();
+                        let Action = setaction+ssaction;
+                        console.log(Action);   
+                        if(Action != '' && Action =='AddAttendance'){
+                          
+                            $('#displayOne').load('../reqHtml/process.php #firstOne');
+
+                       /*
+                          $.ajax({
+                              method:'get',
+                              url:'../reqHtml/process.html',
+                              dataType:'text/html',
+                              success:function(htmdata){
+
+                               
+                              }
+                          })
+
+                       */
+                        }
+        
+    })
+
+    
+})
    setTimeout(() => {
        
     $('#removeId').remove();

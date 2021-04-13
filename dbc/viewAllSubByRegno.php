@@ -57,8 +57,8 @@ $resultSubCodeByPer = $getSubCode->getSubCodeByPer($regno);
                  <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="hover"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                        <li class="hover"><a href="../dbc/getAllStudent.php"><span class="glyphicon glyphicon-home"></span> Attendance viewport</a></li>
+   
+                        <li class="hover"><a href="../dbc/attendance_view.php"><span class="glyphicon glyphicon-home"></span>Back</a></li>
 
                     </ul>
             

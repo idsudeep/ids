@@ -1,6 +1,7 @@
 <?php
 session_start();
  require_once('function.php');
+ require_once('../config.php')
 ?>
 <!DOCTYPE html>
 
@@ -98,6 +99,13 @@ session_start();
   background-color: #262626;
   padding-left: 0px;
 }
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    width: 40%;
+    float: right;
+}
     </style> 
 </head>
 <body>
@@ -118,7 +126,7 @@ session_start();
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="hover"><a href="sysAdminPannel.php"><span class="glyphicon glyphicon-home" style="color:#444488;"></span> Admin Pannel</a></li>
+                    <li class="hover"><a href="actionOfSysadmin.php?Course=<?php echo $_GET['Course']; ?>"><span class="glyphicon glyphicon-home" style="color:#444488;"></span> Back</a></li>
                  
                 </ul>
                  
@@ -216,11 +224,52 @@ session_start();
             <div class='rightside'>
 
             <div id="displayOne">
-
-            <h5 style="color:blue; font-family:monospace; font-size:18px;"> Assign Subject to Faculty </h5>
          
+            <span id="ViewStdtbl">
+        <span style="color:darkorange; margin-bottom:20px; font-size:26px;" >Approve Teacher's</span>
+        <h5 style="margin-left:25px; margin-top:24px; margin-bottom:20px; font-family:monospace; font-size: x-large;"> Teacher's Of <span><?php echo $_GET['Course']; ?> <span style="color:green">Department</span></h5>
+        <div id='tableContents'>
+           
+       
+    <?php 
+    
+         $Ourse = $_GET['Course'];
+         $QueryOne = "select faculty_id, faculty_name,mobile_no,issue_Date,status from faculty_tbl where dept_ = '$Ourse' && status ='inactive'";
+         $Conect_db = mysqli_connect($servername ='localhost',$username ='root',$password='',$db='update_data');
+          $RunQueryOne = mysqli_query($Conect_db,$QueryOne);                         
+    ?>
 
+   <?php 
+   if($RunQueryOne->num_rows>0)
+   {?>
+    <table class="table table-bordered" id="tableId" >
+               <thead>
+                  <tr><th>FullName</th><th>mobile_no</th><th>Data</th><th>status</th><th>Action</th></tr>
+               </thead>  
+   <?php }else{ echo "<p> Zero Result </p>";}?><?php
+   
+       
+       while($someRow = mysqli_fetch_assoc($RunQueryOne))
+       {?> 
         
+       
+                <tbody>
+                    <td><?php echo $someRow['faculty_name'];?></td>
+                    <td><?php echo $someRow['mobile_no']; ?></td>
+                    <td><?php echo $someRow['issue_Date'];?></td>
+                    <td><?php echo $someRow['status']; ?> </td>
+                    <td>
+                        <a href="action.php?action=ApproveTeacher&facultyid=<?php echo $someRow['faculty_id'];?>&Course=<?php echo $_GET['Course'];?>&DoorKey=001" style="text-decoration:none; color:purple;">Approve</a>
+                    </td>
+              </tbody>
+         
+ 
+        <?php }?>
+       
+        </table>
+              <h5 style="margin-left:25px; float:right; font-family:monospace; font-size: x-large; display:inline;" id="errormsg"> </h5>
+       
+   </div>
        
         <!-- end of display -->         
         </div>        
@@ -238,6 +287,7 @@ session_start();
 </html>
 
 <script>
+      
     var forwhat = `<?php echo $_GET['Course'];?>`;  
 
     
@@ -974,7 +1024,7 @@ function FunStdChange(){
                       peopleHTML += "</tr>";
                    }
                  }
-                   var departname = dataT[key]['dept_'] +'  Department';
+                   var departname = 'Teacher of  '+ dataT[key]['dept_'] +'  Department';
                    $('#Dept_name').append(departname);
                  var thRow = `<tr><th style="width: 25%  !important;">FullName</th><th>Email</th><th>Dept</th><th style=" width:20% !important;">mobile_no</th><th style="width:15%  !important;">status</th><th style="width: 25%  !important;">Date_of_join</th><th>Action</th></tr>`;  
                   $("#tableId thead").html(thRow);
@@ -983,7 +1033,7 @@ function FunStdChange(){
                }else{
                                var message = 'NO result Found';
                                    $('#verror').html(message);
-                                   var peopleHTML  = "";
+                               var peopleHTML = "";
                                    $("#tableId tbody").html(peopleHTML);
                                setTimeout(() => { message +="";
                                    $('#verror').html(message);
@@ -1077,4 +1127,5 @@ function FunStdChange(){
                         }return holdArray;
                 }
   
-</script>
+
+       </script>

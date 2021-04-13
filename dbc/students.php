@@ -10,16 +10,25 @@
 
 
         function getTotalNoOfCls($sub_code ,$start_date){
-            $Query_Once = "select total_no_of_class from class_tbl where sub_code ='$sub_code' && start_date ='$start_date'";
+
+            $keyword = substr($start_date,0,4);
+            $Query_Once = "select total_no_of_class from class_tbl where sub_code ='$sub_code' && keyword ='$keyword'";
             $resultOnce = $this->db_handle->runBaseQuery($Query_Once);
-
-
+            foreach($resultOnce as $key){
+                if($key["total_no_of_class"] > 0){
+                    return $key["total_no_of_class"];}
+                    else{
+                        return 0;
+                    }
+             
+        }   
         }    
         function get_attendance_percentage($regno , $sub_code,$start_date,$end_date){ 
 
+            $t_no_cls = $this->getTotalNoOfCls($sub_code,$start_date);
             $query ="SELECT ROUND((SELECT COUNT(*) FROM attendance_tbl 
                     WHERE status = 'P' AND regno = '".$regno."'AND sub_code ='".$sub_code."'
-                    AND issue_date BETWEEN '".$start_date."' AND '".$end_date."' ) * 100) / 32 AS percentage ";
+                    AND issue_date BETWEEN '".$start_date."' AND '".$end_date."' ) * 100) / $t_no_cls AS percentage ";
                         
                     $result = $this->db_handle->runBaseQuery($query);
                             foreach($result as $row){
@@ -65,8 +74,10 @@
         function getAllStudentByPer($sem, $course, $sub_code, $start_date, $end_date, $batch_no){
             
             $get_data = $this->getAllStudentRegno($course, $sem ,$batch_no);
-
-          
+            
+            $no_cls = $this->getTotalNoOfCls($sub_code,$start_date);
+           
+        
             $returnSome = array();
             
             foreach ($get_data as $item){ 
@@ -74,7 +85,7 @@
 
          
                 $getsomeval = $this->get_attendance_percentage($item['regno'],$sub_code,$start_date,$end_date);
-                        array_push($returnSome,array(['regno'=>$item['regno'],'per'=>$getsomeval,'total_days'=>$daysCount[0]['content']]));}
+                        array_push($returnSome,array(['regno'=>$item['regno'],'t_no_cls'=>$no_cls,'per'=>$getsomeval,'total_days'=>$daysCount[0]['content']]));}
                                 $encode_data = json_encode($returnSome);
                                     return $encode_data;
             }
@@ -113,7 +124,7 @@
 
 function getSubCodeByReg($regno){
 
-            $returnSubCode = array();
+           $returnSubCode = array();
     $queryOne = "SELECT DISTINCT sub_code FROM `attendance_tbl` WHERE regno = '".$regno."' ORDER BY `attendance_tbl`.`sub_code` ASC";
     $req_queryOne = $this->db_handle->runBaseQuery($queryOne);     
 
@@ -130,9 +141,13 @@ function getSubCodeByReg($regno){
 function get_SubCode_Per($regno ,$sub_code){
 
     $returnPer = array();
+    $start_date ='2021';
+    $t_no_cls = $this->getTotalNoOfCls($sub_code,$start_date);
 
+     
+ 
     $oneQuery ="SELECT ((SELECT COUNT(*) FROM attendance_tbl 
-    WHERE status = 'P' AND regno = '".$regno."'AND sub_code ='".$sub_code."' ) * 100) / 32 AS percentage ";
+    WHERE status = 'P' AND regno = '".$regno."'AND sub_code ='".$sub_code."' ) * 100) / $t_no_cls AS percentage ";
         
 
 

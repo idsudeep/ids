@@ -14,7 +14,7 @@
         $runQuery = mysqli_query($connect,$query);
         if($runQuery->num_rows !=0){
 
-         $QueryForPass = "select * from faculty_tbl where email ='$email' && Words_='$password'";
+         $QueryForPass = "select status ,faculty_name, faculty_id from faculty_tbl where email ='$email' && Words_='$password'";
 
         
       
@@ -22,11 +22,17 @@
           $arr_res = mysqli_fetch_object($RunQueryOnce);
        
             if($RunQueryOnce->num_rows != 0){
-            $facultyName = $arr_res->faculty_name; 
-            $fId =$arr_res->faculty_id;
+              if($arr_res->status !='inactive'){
+
+                $facultyName = $arr_res->faculty_name; 
+                $fId =$arr_res->faculty_id;
+
+                
             
-              faculty_loggedIn($fId,$facultyName);
-              echo json_encode(array('msg_id'=>'002','msg'=>'verified'));
+                  faculty_loggedIn($fId,$facultyName);
+                  echo json_encode(array('msg_id'=>'002','msg'=>'verified'));
+              }else{ echo json_encode(array('msg_id'=>'200','msg'=>'Waiting For Approvel'));}
+
             }else{
               echo json_encode(array('msg_id'=>'200','msg'=>'Invalid Password'));
 

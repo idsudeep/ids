@@ -5,11 +5,8 @@
 
     
     
-    if(isset($_GET['action'])=='clear_db_req')
-   
-    {
+    if(isset($_GET['action'])=='clear_db_req'){
 
-    
         $sem = $_GET['sem'];
         $course =$_GET['course'];
         $sub_code = $_GET['sub_code'];
@@ -30,38 +27,51 @@
             {}
 
 
-      
-            
-        if(!empty($boom['std_id']))
-        {
+        if(!empty($boom['faculty_id'])){
             $del_query = $mongodb_connect->deleteMany($q_key);
 
-            if($del_query)
-            {
+            if($del_query){
                 $boom_array = ["remove_id"=>"r93",
                                     "remove_success"=>"Take attendance , remove_success"];
-
-                $boom_encode = json_encode($boom_array);
-               
-                
-               echo ($boom_encode);
+                 $boom_encode = json_encode($boom_array);
+                 echo ($boom_encode);
 
             //    header('location:../insider/process.html');
             }
-            else
-            {
+            else{
                 $err_array = ['errorid'=>'e93',
                 'remove_error'=>'Take attendance , 0 Data. '];
-
                 $err_encode = json_encode($err_array);
-          
-
-                echo $err_encode;
+                 echo $err_encode;
             }
-
-        }
-
-        }
+ }
+ else{
+            $err_array = ['errorid'=>'e93',
+            'remove_error'=>'Free slot, 0 Data. '];
+             $err_encode = json_encode($err_array);
+             echo $err_encode; }
+             if(!empty($boom['std_id'])){
+                $del_query = $mongodb_connect->deleteMany($q_key);
+    
+                if($del_query){
+                    $boom_array = ["remove_id"=>"r93",
+                                        "remove_success"=>"Take attendance , remove_success"];
+                     $boom_encode = json_encode($boom_array);
+                     echo ($boom_encode);
+    
+                //    header('location:../insider/process.html');
+                }
+                else{
+                    $err_array = ['errorid'=>'e93',
+                    'remove_error'=>'Take attendance , 0 Data. '];
+                    $err_encode = json_encode($err_array);
+                     echo $err_encode;
+                }
+     }
+      
+      
+      
+          }
 
         else 
         {

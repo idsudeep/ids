@@ -13,27 +13,7 @@ session_start();
     
   
     
-    <style> 
-   
-   #line
-   {
-      border: 1px solid rebeccapurple;
-      height: auto;
-      border-bottom-style:none ;
-      border-right-style: none;
-      border-top-style: none;
-      padding-left:15px;
-      padding-bottom:15px;
 
-
-   }
-
-   .self
-   {
-    
-   }
-
-    </style> 
 </head>
 <body ng-app="myApp" >
 
@@ -55,7 +35,7 @@ session_start();
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="hover"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li class="hover"><a href="../insider/setAttendance.php"><span class="glyphicon glyphicon-home"></span>Back  </a></li>
                     <li class="hover"><a href="../dbc/attendance_view.php"><span class="glyphicon glyphicon-home"></span> Attendance viewport</a></li>
 
                 </ul>
@@ -75,12 +55,12 @@ session_start();
     </nav>
           <br>
           <br>
-          <hr>
+   
         </div>
         <div class="row">
          
 
-            <div class="col-sm-6" >
+            <div class="col-sm-10" style="padding-left:30px;margin-left:60px;">
                 <h6 style="font-size: x-large; font-family: 'Courier New', Courier, monospace;" id="error_ms"> Assign a Task </h6>
                 <hr>
                 <span id="error_msg"></span>
@@ -92,7 +72,7 @@ session_start();
                             <option>MCA</option>
                             <option>BCA</option>
                         </select>
-                        <input type="hidden" name='facultyID' value="<?php echo $_SESSION['faculty_id']; ?>">
+                        <input type="hidden" id='facultyID' name='facultyID' value="<?php echo $_SESSION['faculty_id']; ?>">
                     </div>
                 </div>
                
@@ -136,24 +116,29 @@ session_start();
             </span>
             <span style="float: right;"><button class="btn btn-warning self" name="btn-status" id="statusEvent">Status</button></span>
             </div>
-            <div class="col-sm-6">
-                <h6 style="font-size: x-large; font-family: 'Courier New', Courier, monospace; color: brown;"> Remove a Task </h6>
+            <div class="col-sm-6" style="padding-left:30px;margin-left:60px;">
+                   
+                <h6 style="font-size: x-large; font-family: 'Courier New', Courier, monospace; color: brown;"> Recent info Of Subject  </h6>
                 <hr>
                 <div id="line">
+                <div class="col-span margin-bottom:40px;">
+               
+                    </div>
                     
-                    <h6 id="errormsg" style="color: sandybrown; font-family: 'Courier New', Courier, monospace;"></h6>
-                    <h6 id="sub_msg" style="color: sandybrown; font-family: 'Courier New', Courier, monospace;"></h6>
-                    <h6 id="takenby" style="color: sandybrown; font-family: 'Courier New', Courier, monospace;"></h6>
-                    <h6 id="last_taken_date" style="color: sandybrown; font-family: 'Courier New', Courier, monospace;"></h6>
+                    <h6 id="sub_msg" style="color: sandybrown;  font-size:19px !important;font-family: 'Courier New', Courier, monospace;"></h6>
+                    <h6 id="takenby" style="color: sandybrown; font-size:19px !important; font-family: 'Courier New', Courier, monospace;"></h6>
+                    <h6 id="last_taken_date" style="color: sandybrown;  font-size:19px !important;font-family: 'Courier New', Courier, monospace;"></h6>
                   
-                    <h6 id="present_data" style="color:sandybrown ; font-family: 'Courier New', Courier, monospace;"></h6> 
+                    <h6 id="present_data" style="color:sandybrown ; font-size:19px !important; font-family: 'Courier New', Courier, monospace;"></h6> 
 
-                    <span id="junk-bag"></span>
-                    <h6 id="after-update" style="color:rgb(57, 7, 63) ; font-family: 'Courier New', Courier, monospace;"></h6> 
-
-                    <span id="update-hidden" hidden><button class="btn btn-success">Update</button></span> 
-                    <span id="clear-db" hidden><button class="btn btn-success">Clear_DB</button></span> 
-                  
+                
+                   
+                    <span id="update-hidden"style="background:yellow ;color:red; padding:3px;" hidden><button class="btn btn-success">Update</button></span> 
+                    <span id="clear-db" style="background:green ;color:white; padding:3px;" hidden><button class="btn btn-info">Clear_DB</button></span> 
+                  <hr>
+                  <h6 id="errormsg" style="color:  sandybrown;  font-size:19px !important; font-family: 'Courier New', Courier, monospace;"></h6>
+                  <h6 id="after-update" style="color:rgb(57, 7, 63) ; font-family: 'Courier New', Courier, monospace;"></h6> 
+ 
                 </div>
 
             </div>
@@ -179,6 +164,91 @@ session_start();
                         /*
                         update
                         */    
+           
+
+                        
+              $('#statusEvent').click(function() {
+              var clicks = $(this).data('clicks');
+             var sem = document.getElementById('sem').value;
+              var is_not = document.getElementById('list-i');
+              var course = document.getElementById('course').value;
+
+            
+
+            
+           
+
+              if(is_not != null)
+              {
+
+                setTimeout(() => {
+           // var sub_code = document.querySelector('select#list-i.dynamic-li option').name;
+                var subCode = document.getElementById('list-i').value;
+                    var load = {'sem':sem,
+                                'course':course,
+                                'sub_code':subCode};
+
+                           
+
+                    $.ajax({
+                            type:'GET',
+                            url: '../url/before_assign.php?action=getStatus',
+                            data: load,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success:function(data)
+                            {  
+
+                        // var mydata = JSON.stringify(data);
+                      
+
+                    
+                        if(data[0].sub_code != undefined)
+                        {
+                            
+                            document.getElementById('takenby').innerHTML='Taken ID :' +data[0].faculty_id;
+                            document.getElementById('sub_msg').innerHTML='Subject Code :'+data[0].sub_code;
+                            document.getElementById('last_taken_date').innerHTML='Last_Taken_Date :'+ data[0].last_taken_date;
+                            document.getElementById('present_data').innerHTML ='Present Row :'+ data.no_of_row;
+
+                            if(data.no_of_row >=0)
+                            {
+                                
+                                $('#update-hidden').removeAttr('hidden');
+                                $('#clear-db').removeAttr('hidden');
+
+                 $('#clear-db').click(function(){
+
+                        var query = {'sem':sem,
+                           'course':course,
+                          'sub_code':data[0].sub_code};
+
+                          console.log(query);
+
+              $.ajax({
+                            type:'GET',
+                            url: '../url/clear_db_req.php?action=clear_db_req',
+                            data: query,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success:function(data)
+                            {  
+                           
+                      
+                          
+                                if(data.remove_id == 'r93'){
+                                    document.getElementById('errormsg').innerHTML= data.remove_success;
+                      
+  
+                                }if(data.errorid =='e93'){
+                                    document.getElementById('errormsg').innerHTML= data.remove_error; 
+                                }
+                            }
+                        })
+
+                                })
+
+                            
             $('#update-hidden').click(function()
             {
 
@@ -186,11 +256,16 @@ session_start();
                 var sem = document.getElementById('sem').value;
                 var course = document.getElementById('course').value;
                 var sub_code = document.querySelector('select#list-i.dynamic-li option').name;
+                var facultyID = document.getElementById('facultyID').value;
+                var subj_code = document.getElementById('list-i').value;
 
                 var query = {'sem':sem,
                            'course':course,
-                          'sub_code':sub_code};
+                          'sub_code':subj_code,
+                        'facultyID':facultyID};
 
+                  
+                    console.log(query);    
               $.ajax({
                             type:'GET',
                             url: '../url/db_move_req.php?action=update_btn',
@@ -199,6 +274,7 @@ session_start();
                             dataType: "json",
                             success:function(data)
                             {  
+                               console.log(data); 
                                 if(data.error_code == 'e93')
                                 {
                                     document.getElementById('after-update').innerHTML= data.error_message;
@@ -241,92 +317,9 @@ session_start();
 
 
             })
+            // end of
 
-                        
-              $('#statusEvent').click(function() {
-              var clicks = $(this).data('clicks');
-             var sem = document.getElementById('sem').value;
-              var is_not = document.getElementById('list-i');
-              var course = document.getElementById('course').value;
-
-            
-
-            
-           
-
-              if(is_not != null)
-              {
-
-                setTimeout(() => {
-           // var sub_code = document.querySelector('select#list-i.dynamic-li option').name;
-                var subCode = document.getElementById('list-i').value;
-                    var load = {'sem':sem,
-                                'course':course,
-                                'sub_code':subCode};
-
-                                console.log(load);
-
-
-                    $.ajax({
-                            type:'GET',
-                            url: '../url/before_assign.php?action=getStatus',
-                            data: load,
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success:function(data)
-                            {  
-
-                        // var mydata = JSON.stringify(data);
-                      
-
-                    
-                        if(data[0].sub_code != undefined)
-                        {
-                            
-                            document.getElementById('takenby').innerHTML='Taken ID :' +data[0].faculty_id;
-                            document.getElementById('sub_msg').innerHTML='Subject Code :'+data[0].sub_code;
-                            document.getElementById('last_taken_date').innerHTML='Last_Taken_Date :'+ data[0].last_taken_date;
-                            document.getElementById('present_data').innerHTML ='Present Row :'+ data.no_of_row;
-
-                            if(data.no_of_row >=1)
-                            {
-                                
-                                $('#update-hidden').removeAttr('hidden');
-                                $('#clear-db').removeAttr('hidden');
-
-                 $('#clear-db').click(function(){
-
-                        var query = {'sem':sem,
-                           'course':course,
-                          'sub_code':sub_code};
-
-              $.ajax({
-                            type:'GET',
-                            url: '../url/clear_db_req.php?action=clear_db_req',
-                            data: query,
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success:function(data)
-                            {  
-                                console.log(data);
-                                if(data.remove_id == 'r93')
-                                {
-                                  
-                                    document.getElementById('error_ms').innerHTML= data.remove_success;
-                                    
-                                    setTimeout(() => {
-                                        location.reload();
-                                        
-                                    }, 5000);
-
-                              
-                                    
-                                }
-                           
-                            }
-                        })
-
-                                })
+                                //end of if
                             }
                         
                         }

@@ -37,9 +37,8 @@
                                     <!-- Collect the nav links, forms, and other content for toggling -->
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                     <ul class="nav navbar-nav">
-                                        <li class="hover"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                                        <li class="hover"><a href="../dbc/attendance_view.php"><span class="glyphicon glyphicon-home"></span>VeiwReports</a></li>
-                                    </ul>
+                                        <li class="hover"><a href="../insider/setAttendance.php"><span class="glyphicon glyphicon-home"></span> Back</a></li>
+                                           </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                                     </ul>

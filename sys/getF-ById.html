@@ -1,0 +1,84 @@
+
+    <span id="GetFacultySpan">
+        <span style="color:rgb(37, 214, 140);"><h4>Change/update </h4></span>
+      
+        <span style="color:darkorange;" id="errors"></span>
+        <h5 style="margin-left:25px; margin-top: 30px; font-family:monospace; font-size: x-large; margin-bottom: 25px;">FACULTY INFO </h5>
+        <form>
+         
+                <div class="col-xs-3">
+                    <div class="form-group">
+                    <input type="text" class="form-control" id="FID" placeholder='UserId'>
+                    </div>
+                </div>
+                    
+        </form>
+        <div class="col-xs-4">
+            <div class="form-group">
+            <button class="changeStdOne btn btn-info" name='btn_stdchange' onclick="ChangeFacultyInfo()">Submit</button>
+            </div>
+        </div>
+        <div id='tableContents' >
+            <div id="changed_message" style="font-family: monospace; color: limegreen; float: left;"></div>
+            <table class="table table-bordered" id="tableId" style="margin-top: 98px !important;">
+                <thead>
+                   
+                </thead>  
+                 <tbody>
+               </tbody>
+               </table>
+            
+               
+    </div>
+    </span>
+
+    <P id="errors"></P>
+    </span>
+    <span id="facultyDeleteform">
+        <span style="color:red; font-family:monospace; font-size: x-large; "><h4>Delete </h4></span>
+      
+        <span style="color:darkorange;" id="derror"></span>
+        <h5 style="margin-left:25px; margin-top: 30px; font-family:monospace; font-size: x-large; margin-bottom: 25px;"> Faculty Details </h5>
+        <form>
+           
+                <div class="col-xs-3">
+                    <div class="form-group">
+                    <input type="text" class="form-control" id="delete_input" placeholder="UserId Or Email">
+                    </div>
+                </div>
+                    
+        </form>
+        <div class="col-xs-4">
+            <div class="form-group">
+            <button class="btn btn-info" id='btn_fDelete' onclick="GetIdDel()">Submit</button>
+            </div>
+        </div>
+        <div id='tableContents' >
+            <div id="Delete_message" style="font-family: monospace; color: limegreen; float: left;"></div>
+            <table class="table table-bordered" id="tableId" style="margin-top: 98px !important;">
+                <thead>
+                   
+                </thead>  
+                 <tbody>
+               </tbody>
+               </table>
+            
+               
+    </div>
+    </span>
+    
+ 
+    <span id='viewTeachers'>
+        <p id='verror'></p>
+        <div id='tableContents' >
+            <div id="changed_message" style=" font-size:19px; margin-bottom:30px; font-family: monospace; color: rgb(39, 37, 53); float: left;"> <span id='Dept_name' style=""></span></div>
+            <table class="table table-bordered" id="tableId" style="margin-top: 98px !important;">
+                <thead>
+                   
+                </thead>  
+                 <tbody>
+               </tbody>
+               </table>
+            
+    </div>
+    </span>
