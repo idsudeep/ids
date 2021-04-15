@@ -33,7 +33,9 @@
                     $result = $this->db_handle->runBaseQuery($query);
                             foreach($result as $row){
                                 if($row["percentage"] > 0){
-                                    return $row["percentage"] . '%';}
+                                    $val = $row['percentage'];
+                                    $val_convert = intval($val);
+                                    return $row['percentage'] . '%';}
                                         else{
                                                 return 'NQ';
                         
@@ -153,7 +155,7 @@ function get_SubCode_Per($regno ,$sub_code){
 
     $resOne = $this->db_handle->runBaseQuery($oneQuery);
 
-    print_r(round($resOne));
+   
             foreach($resOne as $returnPer){
                 if($returnPer["percentage"] > 0){
                     $val = $returnPer['percentage'];
@@ -185,8 +187,61 @@ function getSubCodeByPer($reg){
 }
 
 
+ function getStdProfile($regno){
 
+    $array = array ();
+     $pQuery = "select fname ,regno,batch_no ,date_of_join, email,course,sem,mobile_no,userid from std_details where regno = '".$regno."'";
+      
+     $request = $this->db_handle->runBaseQuery($pQuery);
 
+     return $request;
+ }
+
+ function QueryForLoop($sub_code){
+    $date = new DateTime();
+    $date_time = $date->format('Y-m-d');
+    $keyW = substr($date_time,0,4);
+    $QueryTotalcls = "select total_no_of_class from class_tbl  where sub_code ='".$sub_code."' && keyword='".$keyW."'";
+    $linkQuery = $this->db_handle->runBaseQuery($QueryTotalcls);
+    return $linkQuery;
+}
+ function getTotalNoclsBy($regNo){
+
+    $someA =[] ;
+    $getListOfSub = $this->getSubCodeByReg($regNo);
+
+    foreach($getListOfSub as $key => $name){
+    
+   array_push($someA,array($this->QueryForLoop($name['sub_code'])));
+
+    }
+    return json_encode($someA);
+
+ }
+ 
+ function getTotalPresent_DaysBy($reg_no ,$Sub_Code){
+
+    $query_Q = "SELECT(SELECT COUNT(*) FROM `attendance_tbl` WHERE regno ='".$reg_no."' 
+            AND sub_code ='".$Sub_Code."')AS content";
+    
+                $res = $this->db_handle->runBaseQuery($query_Q);
+             
+                $arrays = array();
+                    foreach($res as $val){
+                        array_push($arrays,$val);}
+                            return $arrays;
+}
+function getTotalPresentDaysForProfile($regno){
+    $someAr = [];
+    $getListOfSubject = $this->getSubCodeByReg($regno);
+    foreach($getListOfSubject as $k => $v){
+     
+        array_push($someAr,array($this->getTotalPresent_DaysBy($regno,$v['sub_code'])));
+    }
+    return json_encode($someAr);
+    
+
+}
 
 
         function getAlls($course, $sem, $start_date, $end_date ,$batch_no){

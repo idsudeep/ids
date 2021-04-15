@@ -98,6 +98,7 @@
   
     text-align: center;
     padding-top:20px;
+    text-decoration:none !important;
         }
         
 
@@ -163,7 +164,7 @@ footer {
                <?php 
                 
                     $userid = $login_value['userid'];
-                    $sql = "select sem , course from std_details where userid = '$userid' ";
+                    $sql = "select sem ,regno, course from std_details where userid = '$userid' ";
                     $query = mysqli_query($connect,$sql);
                     $row = mysqli_fetch_assoc($query);
                     $sem = $row['sem'];
@@ -178,8 +179,12 @@ footer {
                ?>
                
          <div class="col span_1_of_3">
-<p class="subject_title" onclick="alert('hi')"> Select a Subject </p>
-               <hr>   
+          <a href='stdProfile.php?regno=<?php echo $row['regno'];?>'><p class="subject_title" > Profile </p> </a>
+    
+        
+         <hr>
+<p class="subject_title" style='font-family:monospace;'> Select a Subject </p>
+         
 	</div>
      
     <div class="col span_1_of_3" hidden>

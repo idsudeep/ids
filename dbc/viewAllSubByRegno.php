@@ -75,19 +75,25 @@ $resultSubCodeByPer = $getSubCode->getSubCodeByPer($regno);
 
             <div class="col-sm-12">
                 <div class="center-inner">
-                <div class ="table-row">
-                Student's ID :<span style="color:purple; font-size:24px; padding-bottom:25px;">
+                <div class ="table-row" style='padding-left:40px;'>
+           <div class='jumbotron'>
+           <h4 class='display-4'> Attendance Details </h4>
+               <span style='font-family:monospace; font-size:19px; color:green; '> Student's ID </span>:<span style="color:purple; font-family:monospace; font-size:19px;  padding-bottom:25px;">
                      <?php if(isset($_GET['regno'])){ echo $_GET['regno'];} ?>
                 </span>
+           </div>
         
-                <table  class="table" style="margin-top:25px;">
+                <table  class="table table-bordered " style="margin-top:25px; margin-left:110px; width:auto;" >
                 <tr>
-                        <th>SubjectS</th>
+                        <th>Subject</th>
                     <?php
                         $resultSubcode = $getSubCode->getSubCodeByReg($regno);
+                   
                         foreach($resultSubcode as $key => $item)
                         {?> 
                         <th><?php echo $item['sub_code']; ?></th> 
+                 
+                    
                   <?php }?>
                 </tr>
                 <tr>
@@ -96,6 +102,8 @@ $resultSubCodeByPer = $getSubCode->getSubCodeByPer($regno);
                   foreach($resultSubCodeByPer as $id => $dat)
                 {?>
                   <td><?php echo $dat['someOne']; ?></td>
+      
+         
 
                     <?php }?>
 

@@ -206,9 +206,15 @@ session_start();
 
             <div id="displayOne">
 
-            <h5 style="color:blue; font-family:monospace; font-size:18px;"> Assign Subject to Faculty </h5>
-         
-
+            <div class="jumbotron">
+  <h3 class="display-4">Welcome to Faculty pannel!</h3>
+  <p class="lead"> LEFT Pannel provide the link  .</p>
+  <hr class="my-4">
+  <p>Writing objects: done.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button"> more</a>
+  </p>
+</div>
         
        
         <!-- end of display -->         

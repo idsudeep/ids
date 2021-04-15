@@ -102,7 +102,7 @@ if($_GET['action'] == 'update_btn')
                         $OneMoreLayer = "select * from class_tbl where faculty_id = '$faculty_id' && sub_code='$sub_code' && recent_date !='$date_time'";
                         $RunOneMoreQuery = mysqli_query($connect,$OneMoreLayer);
                     
-                        if($RunOneMoreQuery->num_rows ==0){
+                        if($RunOneMoreQuery->num_rows !=0){
                         $UpdateQuery_no_of_cls = "UPDATE class_tbl SET total_no_of_class = '".$total_cls."' , recent_date = '$date_time'  WHERE class_tbl.sub_code = '$sub_code' && recent_date !='$date_time'";
                   
                         $runUpdateQuery= mysqli_query($connect, $UpdateQuery_no_of_cls);

@@ -36,6 +36,11 @@ require_once('students.php');
 #btn-id
 {
     border:1px solid yellow;
+    color:black;
+}
+#dyn-btn{
+    color:black !important;
+    text-decoration:none !important;
 }
 #Clear
 {
@@ -167,9 +172,9 @@ height:200px;
     
    <div class="self-div">
 
-<table class="table table_border " id="tableData">
+<table class="table table-bordered " id="tableData" hidden>
     <th>Student's ID </th>
-    <th>Total Present Days </th>
+    <th>Present Days/<span style="color:green"> Total classs :</span> <span id='t_no_cls' style='font-family:monospace; color:purple; font-size:17px;'></span></th>
     <th>Total Percentage</th>
     
     
@@ -246,33 +251,25 @@ height:200px;
                                 contentType: "application/json; charset=utf-8",
                                     dataType: "json",
                                     success:function(data){ 
-                                    
-                                    console.log(data);
+                                    var t_no_cls ='';
+                             
+                                  
                                     if(data != undefined){
                                      
                                             $('#tableData td').remove();
                                          $.each(data, function(index , val){
-                                             
-
-                                            if(val){
-
-
-
-                                              var  row= "";
-                                                
-                                                row = $("<tr><td id='dyn-btn'><a href=viewAllSubByRegno.php?regno="+ val[0].regno +"> " + val[0].regno + "</td><td>" + val[0].total_days + "</td><td>"+val[0].per+"</td><a/></tr>");
-                                                 $("#tableData").append(row);  
-                                       
-
-                                            }
-                                             
-                                        
-                                                  
+                                     if(val){  var  row= "";
+                                        $('#tableData').removeAttr('hidden');         
+row = $("<tr><td id='dyn-btn'><a href=viewAllSubByRegno.php?regno="+ val[0].regno +"> " + val[0].regno + "</td><td>" + val[0].total_days + "</td><td>"+val[0].per+"</td><a/></tr>");
+                      $("#tableData").append(row);  
+                                       t_no_cls = val[0].t_no_cls;
+                                        }
+                                                       
                                          })
-                                    }
 
+                                         $('#t_no_cls').html(t_no_cls);
                                         
-                           
+                                    } 
                             }
                         
                         }) 

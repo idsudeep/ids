@@ -20,7 +20,7 @@ $instance_student = new student();
     
      $get_a = $instance_student->getAllStudentByPer($sem, $course, $sub_code, $start_date, $end_date, $batch_no);
  
-     if(!empty($get_a))
+   if(!empty($get_a))
      {
         echo $get_a;  
 

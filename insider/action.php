@@ -211,53 +211,49 @@ if(isset($_POST['reg_btn']) && $_GET['action']=='register')
                       WHERE email = '$email' && model_no like '$model' && device_details.dd_id  = std_details.userid ";
    
               $query_model = mysqli_query($connect , $sql_model);
+
+            
+              
             if(mysqli_num_rows($query_model) != 0)
                     {
-                      if($result['password']==$password && $result['email']==$email )
-                        
-                    {       $userid = $result['userid'];
+                      if($result['status'] !='active'){
+
+                        MsgFlash('error','wait for Approvel. <br>'.$message);
+                        header('location:login.php');
+                        die();
+                       }
+                      if($result['password']==$password && $result['email']==$email ){       
+                           $userid = $result['userid'];
                             $fname = $result['fname'];
                             loginToqrc($userid,$fname);
                         
                             header('location:mob_view.php');
-                    }else
-                        {
+                    }else{
                             /*outer */
                             MsgFlash('error','undefined Email or Password . <br>'.$message);
                             header('location:login.php');
                         }
-    }else
-      {
+    }else{   
             MsgFlash('error','device issues  <br>');
             header('location:login.php');
-          
-          die();
+           die();
       }
       
   }
-/*
-  student login end 
-*/ 
 
 
 
-  if(isset($_POST['btn-assign']) && $_GET['action']== 'sub_value')
+
+  if(isset($_POST['btn-assign']) && $_GET['action']== 'sub_value'){
       
-  {
-      
-   
-
-    /* mongodb://heroku_gtz0xx3x:b8g6cgtdcg3ucqehpmpfk7nmui@ds137283.mlab.com:37283/heroku_gtz0xx3x */   
+   /* mongodb://heroku_gtz0xx3x:b8g6cgtdcg3ucqehpmpfk7nmui@ds137283.mlab.com:37283/heroku_gtz0xx3x */   
       $sub_code = $_POST['sub_code'];
       $sem =$_POST['sem'];
       $course = $_POST['course'];
- 
-      
       $faculty_id = $_POST['facultyID'];
-      
       $coll_name = $course.$sem."_".$sub_code;
     
-       require '../vendor/autoload.php';
+      require '../vendor/autoload.php';
       
       /* $uri = "mongodb://heroku_gtz0xx3x:b8g6cgtdcg3ucqehpmpfk7nmui@ds137283.mlab.com:37283/heroku_gtz0xx3x?retryWrites=false";*/
        
