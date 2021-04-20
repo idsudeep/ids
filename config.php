@@ -7,18 +7,9 @@ $username ="root";
 $password="";
 $dbconnect="update_data";
 
-
-// create a connection with database 
-
 $connect = mysqli_connect($servername,$username,$password,$dbconnect) or die();
-
-
-// check connection with database
-
-if (!$connect)
-{
-	die("connection failed:".mysqli_connect_error());
-}
+if (!$connect){
+	die("connection failed:".mysqli_connect_error());}
 
 
 ?>
